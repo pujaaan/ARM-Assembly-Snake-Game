@@ -1,0 +1,389 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/gameScreen.o
+LOAD build/three.o
+LOAD build/snakeHead.o
+LOAD build/eight.o
+LOAD build/pauseScreen.o
+LOAD build/snakeMovement.o
+LOAD build/jtag.o
+LOAD build/one.o
+LOAD build/loseScreen.o
+LOAD build/five.o
+LOAD build/FrameBufferPixel.o
+LOAD build/winScreen.o
+LOAD build/Interrupt.o
+LOAD build/heart.o
+LOAD build/scoreAndLives.o
+LOAD build/seven.o
+LOAD build/livesImage.o
+LOAD build/startScreen.o
+LOAD build/main.o
+LOAD build/blank.o
+LOAD build/zero.o
+LOAD build/apple.o
+LOAD build/brick.o
+LOAD build/scoreImage.o
+LOAD build/arrow.o
+LOAD build/two.o
+LOAD build/Controller.o
+LOAD build/nine.o
+LOAD build/door.o
+LOAD build/four.o
+LOAD build/six.o
+LOAD build/backGround.o
+LOAD uart.o
+LOAD gpio.o
+
+.init           0x00008000        0x8
+ *(.init)
+ .init          0x00008000        0x8 build/main.o
+                0x00008000                _start
+
+.data           0x00009080   0x31c7f0
+ *(.data)
+ .data          0x00009080       0x64 build/gameScreen.o
+                0x00009080                brickLocation
+ *fill*         0x000090e4        0xc 3f3f3f3f
+ .data          0x000090f0      0x800 build/three.o
+                0x000090f0                three
+ .data          0x000098f0      0x800 build/snakeHead.o
+                0x000098f0                snakeHead
+ .data          0x0000a0f0      0x800 build/eight.o
+                0x0000a0f0                eight
+ .data          0x0000a8f0    0x26520 build/pauseScreen.o
+                0x0000a8f0                pauseScreen
+ .data          0x00030e10        0x0 build/snakeMovement.o
+ .data          0x00030e10        0x0 build/jtag.o
+ .data          0x00030e10      0x800 build/one.o
+                0x00030e10                one
+ .data          0x00031610    0xbc5d0 build/loseScreen.o
+                0x00031610                loseScreen
+ .data          0x000edbe0      0x800 build/five.o
+                0x000edbe0                five
+ .data          0x000ee3e0       0x30 build/FrameBufferPixel.o
+                0x000ee3e0                FrameBufferInfo
+                0x000ee408                FrameBufferPointer
+ .data          0x000ee410    0xabc10 build/winScreen.o
+                0x000ee410                winScreen
+ .data          0x0019a020       0x40 build/Interrupt.o
+                0x0019a020                IntTable
+ .data          0x0019a060      0x800 build/heart.o
+                0x0019a060                heart
+ .data          0x0019a860        0x0 build/scoreAndLives.o
+ .data          0x0019a860      0x800 build/seven.o
+                0x0019a860                seven
+ .data          0x0019b060     0x2800 build/livesImage.o
+                0x0019b060                livesImage
+ .data          0x0019d860   0x180000 build/startScreen.o
+                0x0019d860                startScreen
+ .data          0x0031d860        0x0 build/main.o
+ .data          0x0031d860      0x800 build/blank.o
+                0x0031d860                blank
+ .data          0x0031e060      0x800 build/zero.o
+                0x0031e060                zero
+ .data          0x0031e860      0x800 build/apple.o
+                0x0031e860                apple
+ .data          0x0031f060      0x800 build/brick.o
+                0x0031f060                brick
+ .data          0x0031f860     0x2800 build/scoreImage.o
+                0x0031f860                scoreImage
+ .data          0x00322060      0x800 build/arrow.o
+                0x00322060                arrow
+ .data          0x00322860      0x800 build/two.o
+                0x00322860                two
+ .data          0x00323060       0x10 build/Controller.o
+                0x00323060                buttons
+ .data          0x00323070      0x800 build/nine.o
+                0x00323070                nine
+ .data          0x00323870      0x800 build/door.o
+                0x00323870                door
+ .data          0x00324070      0x800 build/four.o
+                0x00324070                four
+ .data          0x00324870      0x800 build/six.o
+                0x00324870                six
+ .data          0x00325070      0x800 build/backGround.o
+                0x00325070                gameBackground
+ .data          0x00325870        0x0 uart.o
+ .data          0x00325870        0x0 gpio.o
+ *.c.o(*)
+
+.igot.plt       0x00325870        0x0
+ .igot.plt      0x00000000        0x0 build/gameScreen.o
+
+.text           0x00325870     0x1530
+ *.c.o(.text)
+ *(.text)
+ .text          0x00325870      0x258 build/gameScreen.o
+                0x00325870                backGround
+ .text          0x00325ac8        0x0 build/three.o
+ .text          0x00325ac8        0x0 build/snakeHead.o
+ .text          0x00325ac8        0x0 build/eight.o
+ .text          0x00325ac8        0x0 build/pauseScreen.o
+ .text          0x00325ac8      0x89c build/snakeMovement.o
+                0x00325ac8                snakePrintInitial
+                0x00325ce8                snakeRight
+                0x00325d20                snakeLeft
+                0x00325d58                snakeUp
+                0x00325d90                snakeDown
+                0x003260e4                randomNumber
+                0x0032617c                div
+                0x003261a8                tracker
+                0x003262d4                lifeCounter
+                0x003262d8                randomLocation
+                0x003262e0                score
+                0x003262e4                pauseFlag
+                0x003262f4                doorLocation
+                0x003262fc                appleLocation
+                0x00326304                valuePack
+ .text          0x00326364       0x8c build/jtag.o
+                0x00326364                EnableJTAG
+ .text          0x003263f0        0x0 build/one.o
+ .text          0x003263f0        0x0 build/loseScreen.o
+ .text          0x003263f0        0x0 build/five.o
+ .text          0x003263f0      0x100 build/FrameBufferPixel.o
+                0x003263f0                InitFrameBuffer
+                0x00326438                DrawPixel
+                0x00326480                MailboxWrite
+                0x003264b0                MailboxRead
+ .text          0x003264f0        0x0 build/winScreen.o
+ .text          0x003264f0      0x118 build/Interrupt.o
+                0x003264f0                InterruptEnable
+                0x00326504                disableInterrupt
+                0x00326528                waitEnable
+                0x00326538                waitingTime
+                0x003265ac                InstallIntTable
+ .text          0x00326608        0x0 build/heart.o
+ .text          0x00326608       0xf4 build/scoreAndLives.o
+                0x00326608                scorePrint
+                0x0032666c                lifePrint
+ .text          0x003266fc        0x0 build/seven.o
+ .text          0x003266fc        0x0 build/livesImage.o
+ .text          0x003266fc        0x0 build/startScreen.o
+ .text          0x003266fc      0x220 build/main.o
+                0x003266fc                main
+                0x00326774                haltLoop$
+                0x00326778                drawGame
+                0x003267c8                drawCell
+                0x003268bc                clearScreen
+ .text          0x0032691c        0x0 build/blank.o
+ .text          0x0032691c        0x0 build/zero.o
+ .text          0x0032691c        0x0 build/apple.o
+ .text          0x0032691c        0x0 build/brick.o
+ .text          0x0032691c        0x0 build/scoreImage.o
+ .text          0x0032691c        0x0 build/arrow.o
+ .text          0x0032691c        0x0 build/two.o
+ .text          0x0032691c      0x1f8 build/Controller.o
+                0x00326928                Init_GPIO
+                0x00326a10                wait
+                0x00326a2c                Read_SNES
+ .text          0x00326b14        0x0 build/nine.o
+ .text          0x00326b14        0x0 build/door.o
+ .text          0x00326b14        0x0 build/four.o
+ .text          0x00326b14        0x0 build/six.o
+ .text          0x00326b14        0x0 build/backGround.o
+ .text          0x00326b14      0x1b4 uart.o
+                0x00326b14                InitUART
+                0x00326bd4                PutCharUART
+                0x00326bf0                GetCharUART
+                0x00326c0c                WriteStringUART
+                0x00326c38                ReadLineUART
+ .text          0x00326cc8       0xd8 gpio.o
+                0x00326cc8                GetGpioAddress
+                0x00326cd0                SetGpioFunction
+                0x00326d1c                SetGpio
+                0x00326d58                GetGpio
+OUTPUT(build/output.elf elf32-littlearm)
+
+.glue_7         0x00326da0        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00326da0        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00326da0        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00326da0        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00326da0        0x0
+ .iplt          0x00000000        0x0 build/gameScreen.o
+
+.rel.dyn        0x00326da0        0x0
+ .rel.iplt      0x00000000        0x0 build/gameScreen.o
+
+.bss            0x00326da0        0x0
+ .bss           0x00326da0        0x0 build/gameScreen.o
+ .bss           0x00326da0        0x0 build/three.o
+ .bss           0x00326da0        0x0 build/snakeHead.o
+ .bss           0x00326da0        0x0 build/eight.o
+ .bss           0x00326da0        0x0 build/pauseScreen.o
+ .bss           0x00326da0        0x0 build/snakeMovement.o
+ .bss           0x00326da0        0x0 build/jtag.o
+ .bss           0x00326da0        0x0 build/one.o
+ .bss           0x00326da0        0x0 build/loseScreen.o
+ .bss           0x00326da0        0x0 build/five.o
+ .bss           0x00326da0        0x0 build/FrameBufferPixel.o
+ .bss           0x00326da0        0x0 build/winScreen.o
+ .bss           0x00326da0        0x0 build/Interrupt.o
+ .bss           0x00326da0        0x0 build/heart.o
+ .bss           0x00326da0        0x0 build/scoreAndLives.o
+ .bss           0x00326da0        0x0 build/seven.o
+ .bss           0x00326da0        0x0 build/livesImage.o
+ .bss           0x00326da0        0x0 build/startScreen.o
+ .bss           0x00326da0        0x0 build/main.o
+ .bss           0x00326da0        0x0 build/blank.o
+ .bss           0x00326da0        0x0 build/zero.o
+ .bss           0x00326da0        0x0 build/apple.o
+ .bss           0x00326da0        0x0 build/brick.o
+ .bss           0x00326da0        0x0 build/scoreImage.o
+ .bss           0x00326da0        0x0 build/arrow.o
+ .bss           0x00326da0        0x0 build/two.o
+ .bss           0x00326da0        0x0 build/Controller.o
+ .bss           0x00326da0        0x0 build/nine.o
+ .bss           0x00326da0        0x0 build/door.o
+ .bss           0x00326da0        0x0 build/four.o
+ .bss           0x00326da0        0x0 build/six.o
+ .bss           0x00326da0        0x0 build/backGround.o
+ .bss           0x00326da0        0x0 uart.o
+ .bss           0x00326da0        0x0 gpio.o
+
+.ARM.attributes
+                0x00000000       0x26
+ .ARM.attributes
+                0x00000000       0x26 build/gameScreen.o
+ .ARM.attributes
+                0x00000026       0x26 build/three.o
+ .ARM.attributes
+                0x0000004c       0x26 build/snakeHead.o
+ .ARM.attributes
+                0x00000072       0x26 build/eight.o
+ .ARM.attributes
+                0x00000098       0x26 build/pauseScreen.o
+ .ARM.attributes
+                0x000000be       0x26 build/snakeMovement.o
+ .ARM.attributes
+                0x000000e4       0x26 build/jtag.o
+ .ARM.attributes
+                0x0000010a       0x26 build/one.o
+ .ARM.attributes
+                0x00000130       0x26 build/loseScreen.o
+ .ARM.attributes
+                0x00000156       0x26 build/five.o
+ .ARM.attributes
+                0x0000017c       0x26 build/FrameBufferPixel.o
+ .ARM.attributes
+                0x000001a2       0x26 build/winScreen.o
+ .ARM.attributes
+                0x000001c8       0x26 build/Interrupt.o
+ .ARM.attributes
+                0x000001ee       0x26 build/heart.o
+ .ARM.attributes
+                0x00000214       0x26 build/scoreAndLives.o
+ .ARM.attributes
+                0x0000023a       0x26 build/seven.o
+ .ARM.attributes
+                0x00000260       0x26 build/livesImage.o
+ .ARM.attributes
+                0x00000286       0x26 build/startScreen.o
+ .ARM.attributes
+                0x000002ac       0x26 build/main.o
+ .ARM.attributes
+                0x000002d2       0x26 build/blank.o
+ .ARM.attributes
+                0x000002f8       0x26 build/zero.o
+ .ARM.attributes
+                0x0000031e       0x26 build/apple.o
+ .ARM.attributes
+                0x00000344       0x26 build/brick.o
+ .ARM.attributes
+                0x0000036a       0x26 build/scoreImage.o
+ .ARM.attributes
+                0x00000390       0x26 build/arrow.o
+ .ARM.attributes
+                0x000003b6       0x26 build/two.o
+ .ARM.attributes
+                0x000003dc       0x26 build/Controller.o
+ .ARM.attributes
+                0x00000402       0x26 build/nine.o
+ .ARM.attributes
+                0x00000428       0x26 build/door.o
+ .ARM.attributes
+                0x0000044e       0x26 build/four.o
+ .ARM.attributes
+                0x00000474       0x26 build/six.o
+ .ARM.attributes
+                0x0000049a       0x26 build/backGround.o
+ .ARM.attributes
+                0x000004c0       0x26 uart.o
+ .ARM.attributes
+                0x000004e6       0x26 gpio.o
+
+.debug_line     0x00000000      0x812
+ .debug_line    0x00000000       0xe5 build/gameScreen.o
+ .debug_line    0x000000e5      0x237 build/snakeMovement.o
+ .debug_line    0x0000031c       0x61 build/jtag.o
+ .debug_line    0x0000037d       0x96 build/FrameBufferPixel.o
+ .debug_line    0x00000413       0xa5 build/Interrupt.o
+ .debug_line    0x000004b8       0x82 build/scoreAndLives.o
+ .debug_line    0x0000053a       0xe4 build/main.o
+ .debug_line    0x0000061e       0xc5 build/Controller.o
+ .debug_line    0x000006e3       0xb6 uart.o
+ .debug_line    0x00000799       0x79 gpio.o
+
+.debug_info     0x00000000      0x425
+ .debug_info    0x00000000       0x6d build/gameScreen.o
+ .debug_info    0x0000006d       0x70 build/snakeMovement.o
+ .debug_info    0x000000dd       0x67 build/jtag.o
+ .debug_info    0x00000144       0x73 build/FrameBufferPixel.o
+ .debug_info    0x000001b7       0x68 build/Interrupt.o
+ .debug_info    0x0000021f       0x70 build/scoreAndLives.o
+ .debug_info    0x0000028f       0x63 build/main.o
+ .debug_info    0x000002f2       0x6d build/Controller.o
+ .debug_info    0x0000035f       0x63 uart.o
+ .debug_info    0x000003c2       0x63 gpio.o
+
+.debug_abbrev   0x00000000       0xc4
+ .debug_abbrev  0x00000000       0x14 build/gameScreen.o
+ .debug_abbrev  0x00000014       0x14 build/snakeMovement.o
+ .debug_abbrev  0x00000028       0x14 build/jtag.o
+ .debug_abbrev  0x0000003c       0x14 build/FrameBufferPixel.o
+ .debug_abbrev  0x00000050       0x12 build/Interrupt.o
+ .debug_abbrev  0x00000062       0x14 build/scoreAndLives.o
+ .debug_abbrev  0x00000076       0x12 build/main.o
+ .debug_abbrev  0x00000088       0x14 build/Controller.o
+ .debug_abbrev  0x0000009c       0x14 uart.o
+ .debug_abbrev  0x000000b0       0x14 gpio.o
+
+.debug_aranges  0x00000000      0x150
+ .debug_aranges
+                0x00000000       0x20 build/gameScreen.o
+ .debug_aranges
+                0x00000020       0x20 build/snakeMovement.o
+ .debug_aranges
+                0x00000040       0x20 build/jtag.o
+ .debug_aranges
+                0x00000060       0x20 build/FrameBufferPixel.o
+ .debug_aranges
+                0x00000080       0x28 build/Interrupt.o
+ .debug_aranges
+                0x000000a8       0x20 build/scoreAndLives.o
+ .debug_aranges
+                0x000000c8       0x28 build/main.o
+ .debug_aranges
+                0x000000f0       0x20 build/Controller.o
+ .debug_aranges
+                0x00000110       0x20 uart.o
+ .debug_aranges
+                0x00000130       0x20 gpio.o
+
+.debug_ranges   0x00000000       0x40
+ .debug_ranges  0x00000000       0x20 build/Interrupt.o
+ .debug_ranges  0x00000020       0x20 build/main.o

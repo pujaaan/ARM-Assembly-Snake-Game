@@ -1,0 +1,1560 @@
+
+build/output.elf:     file format elf32-littlearm
+
+
+Disassembly of section .init:
+
+00008000 <_start>:
+    8000:	eb0c7969 	bl	3265ac <InstallIntTable>
+    8004:	ea0c79bc 	b	3266fc <main>
+
+Disassembly of section .text:
+
+00325870 <backGround>:
+  325870:	e92d0ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp}
+  325874:	e59f820c 	ldr	r8, [pc, #524]	; 325a88 <returnFromPaused+0x68>
+  325878:	e3a06000 	mov	r6, #0
+  32587c:	e3a07000 	mov	r7, #0
+  325880:	e59f9204 	ldr	r9, [pc, #516]	; 325a8c <returnFromPaused+0x6c>
+  325884:	e59fa204 	ldr	sl, [pc, #516]	; 325a90 <returnFromPaused+0x70>
+
+00325888 <backGroundLoop>:
+  325888:	eb0003ce 	bl	3267c8 <drawCell>
+  32588c:	e286601f 	add	r6, r6, #31
+  325890:	e1560009 	cmp	r6, r9
+  325894:	bafffffb 	blt	325888 <backGroundLoop>
+  325898:	e3a06000 	mov	r6, #0
+  32589c:	e157000a 	cmp	r7, sl
+  3258a0:	e287701f 	add	r7, r7, #31
+  3258a4:	bafffff7 	blt	325888 <backGroundLoop>
+
+003258a8 <gameScreen>:
+  3258a8:	e3a04000 	mov	r4, #0
+  3258ac:	e3a06020 	mov	r6, #32
+  3258b0:	e3a07020 	mov	r7, #32
+  3258b4:	e59f81d8 	ldr	r8, [pc, #472]	; 325a94 <returnFromPaused+0x74>
+
+003258b8 <gameScreenLoopX1>:
+  3258b8:	eb0003c2 	bl	3267c8 <drawCell>
+  3258bc:	e286601f 	add	r6, r6, #31
+  3258c0:	e354001f 	cmp	r4, #31
+  3258c4:	e2844001 	add	r4, r4, #1
+  3258c8:	dafffffa 	ble	3258b8 <gameScreenLoopX1>
+  3258cc:	e3a07e2e 	mov	r7, #736	; 0x2e0
+  3258d0:	e3a06000 	mov	r6, #0
+  3258d4:	e3a04000 	mov	r4, #0
+
+003258d8 <gameScreenLoopX2>:
+  3258d8:	eb0003ba 	bl	3267c8 <drawCell>
+  3258dc:	e286601f 	add	r6, r6, #31
+  3258e0:	e354001f 	cmp	r4, #31
+  3258e4:	e2844001 	add	r4, r4, #1
+  3258e8:	dafffffa 	ble	3258d8 <gameScreenLoopX2>
+  3258ec:	e3a06000 	mov	r6, #0
+  3258f0:	e3a07020 	mov	r7, #32
+  3258f4:	e3a04000 	mov	r4, #0
+
+003258f8 <gameScreenLoopY1>:
+  3258f8:	eb0003b2 	bl	3267c8 <drawCell>
+  3258fc:	e287701f 	add	r7, r7, #31
+  325900:	e3540015 	cmp	r4, #21
+  325904:	e2844001 	add	r4, r4, #1
+  325908:	dafffffa 	ble	3258f8 <gameScreenLoopY1>
+  32590c:	e3a06e3e 	mov	r6, #992	; 0x3e0
+  325910:	e3a07020 	mov	r7, #32
+  325914:	e3a04000 	mov	r4, #0
+
+00325918 <gameScreenLoopY2>:
+  325918:	eb0003aa 	bl	3267c8 <drawCell>
+  32591c:	e287701f 	add	r7, r7, #31
+  325920:	e3540015 	cmp	r4, #21
+  325924:	e2844001 	add	r4, r4, #1
+  325928:	dafffffa 	ble	325918 <gameScreenLoopY2>
+
+0032592c <drawBlock>:
+  32592c:	e59fb164 	ldr	fp, [pc, #356]	; 325a98 <returnFromPaused+0x78>
+
+00325930 <drawBlockLoop>:
+  325930:	e49b6004 	ldr	r6, [fp], #4
+  325934:	e3560000 	cmp	r6, #0
+  325938:	08bd0ff0 	popeq	{r4, r5, r6, r7, r8, r9, sl, fp}
+  32593c:	0a000002 	beq	32594c <printLives>
+  325940:	e49b7004 	ldr	r7, [fp], #4
+  325944:	eb00039f 	bl	3267c8 <drawCell>
+  325948:	eafffff8 	b	325930 <drawBlockLoop>
+
+0032594c <printLives>:
+  32594c:	e59f8148 	ldr	r8, [pc, #328]	; 325a9c <returnFromPaused+0x7c>
+  325950:	e3a06e26 	mov	r6, #608	; 0x260
+  325954:	e3a07000 	mov	r7, #0
+  325958:	e3a0909f 	mov	r9, #159	; 0x9f
+  32595c:	e3a0a01f 	mov	sl, #31
+  325960:	eb000384 	bl	326778 <drawGame>
+  325964:	e59f1134 	ldr	r1, [pc, #308]	; 325aa0 <returnFromPaused+0x80>
+  325968:	e5910000 	ldr	r0, [r1]
+  32596c:	e1a06000 	mov	r6, r0
+  325970:	eb00033d 	bl	32666c <lifePrint>
+  325974:	e3560004 	cmp	r6, #4
+  325978:	ca000004 	bgt	325990 <printScore>
+
+0032597c <door>:
+  32597c:	e59f5120 	ldr	r5, [pc, #288]	; 325aa4 <returnFromPaused+0x84>
+  325980:	e5956000 	ldr	r6, [r5]
+  325984:	e5957004 	ldr	r7, [r5, #4]
+  325988:	e59f8118 	ldr	r8, [pc, #280]	; 325aa8 <returnFromPaused+0x88>
+  32598c:	eb00038d 	bl	3267c8 <drawCell>
+
+00325990 <printScore>:
+  325990:	e59f8114 	ldr	r8, [pc, #276]	; 325aac <returnFromPaused+0x8c>
+  325994:	e3a06060 	mov	r6, #96	; 0x60
+  325998:	e3a07000 	mov	r7, #0
+  32599c:	e3a0909f 	mov	r9, #159	; 0x9f
+  3259a0:	e3a0a01f 	mov	sl, #31
+  3259a4:	eb000373 	bl	326778 <drawGame>
+  3259a8:	e59f1100 	ldr	r1, [pc, #256]	; 325ab0 <returnFromPaused+0x90>
+  3259ac:	e5910000 	ldr	r0, [r1]
+  3259b0:	e3a0100a 	mov	r1, #10
+  3259b4:	eb0001f0 	bl	32617c <div>
+  3259b8:	e1a05000 	mov	r5, r0
+  3259bc:	e1a00001 	mov	r0, r1
+  3259c0:	e3a06c01 	mov	r6, #256	; 0x100
+  3259c4:	eb00030f 	bl	326608 <scorePrint>
+  3259c8:	e1a00005 	mov	r0, r5
+  3259cc:	e3a0100a 	mov	r1, #10
+  3259d0:	eb0001e9 	bl	32617c <div>
+  3259d4:	e1a00001 	mov	r0, r1
+  3259d8:	e3a060e0 	mov	r6, #224	; 0xe0
+  3259dc:	eb000309 	bl	326608 <scorePrint>
+  3259e0:	e59f00cc 	ldr	r0, [pc, #204]	; 325ab4 <returnFromPaused+0x94>
+  3259e4:	e5901000 	ldr	r1, [r0]
+  3259e8:	e3510001 	cmp	r1, #1
+  3259ec:	0a000000 	beq	3259f4 <paused>
+  3259f0:	ea000034 	b	325ac8 <snakePrintInitial>
+
+003259f4 <paused>:
+  3259f4:	e59fb0bc 	ldr	fp, [pc, #188]	; 325ab8 <returnFromPaused+0x98>
+  3259f8:	e5909008 	ldr	r9, [r0, #8]
+  3259fc:	e590a00c 	ldr	sl, [r0, #12]
+
+00325a00 <pausedPrintSnake>:
+  325a00:	e79b600a 	ldr	r6, [fp, sl]
+  325a04:	e28aa004 	add	sl, sl, #4
+  325a08:	e79b700a 	ldr	r7, [fp, sl]
+  325a0c:	e28aa004 	add	sl, sl, #4
+  325a10:	e59f80a4 	ldr	r8, [pc, #164]	; 325abc <returnFromPaused+0x9c>
+  325a14:	eb00036b 	bl	3267c8 <drawCell>
+  325a18:	e15a0009 	cmp	sl, r9
+  325a1c:	bafffff7 	blt	325a00 <pausedPrintSnake>
+
+00325a20 <returnFromPaused>:
+  325a20:	eb0002b2 	bl	3264f0 <InterruptEnable>
+  325a24:	e2499004 	sub	r9, r9, #4
+  325a28:	e79b5009 	ldr	r5, [fp, r9]
+  325a2c:	e2499004 	sub	r9, r9, #4
+  325a30:	e79b4009 	ldr	r4, [fp, r9]
+  325a34:	e59f0078 	ldr	r0, [pc, #120]	; 325ab4 <returnFromPaused+0x94>
+  325a38:	e5901004 	ldr	r1, [r0, #4]
+  325a3c:	e5909008 	ldr	r9, [r0, #8]
+  325a40:	e590a00c 	ldr	sl, [r0, #12]
+  325a44:	e59f0074 	ldr	r0, [pc, #116]	; 325ac0 <returnFromPaused+0xa0>
+  325a48:	e5906000 	ldr	r6, [r0]
+  325a4c:	e5907004 	ldr	r7, [r0, #4]
+  325a50:	e59f806c 	ldr	r8, [pc, #108]	; 325ac4 <returnFromPaused+0xa4>
+  325a54:	e52d1004 	push	{r1}		; (str r1, [sp, #-4]!)
+  325a58:	eb00035a 	bl	3267c8 <drawCell>
+  325a5c:	e49d1004 	pop	{r1}		; (ldr r1, [sp], #4)
+  325a60:	e3510005 	cmp	r1, #5
+  325a64:	0a0000bb 	beq	325d58 <snakeUp>
+  325a68:	e3510006 	cmp	r1, #6
+  325a6c:	0a0000c7 	beq	325d90 <snakeDown>
+  325a70:	e3510007 	cmp	r1, #7
+  325a74:	0a0000a9 	beq	325d20 <snakeLeft>
+  325a78:	e3510008 	cmp	r1, #8
+  325a7c:	0a000099 	beq	325ce8 <snakeRight>
+  325a80:	e3510010 	cmp	r1, #16
+  325a84:	0a00000f 	beq	325ac8 <snakePrintInitial>
+  325a88:	00325070 	.word	0x00325070
+  325a8c:	000003ff 	.word	0x000003ff
+  325a90:	000002ff 	.word	0x000002ff
+  325a94:	0031f060 	.word	0x0031f060
+  325a98:	00009080 	.word	0x00009080
+  325a9c:	0019b060 	.word	0x0019b060
+  325aa0:	003262d4 	.word	0x003262d4
+  325aa4:	003262f4 	.word	0x003262f4
+  325aa8:	0031d860 	.word	0x0031d860
+  325aac:	0031f860 	.word	0x0031f860
+  325ab0:	003262e0 	.word	0x003262e0
+  325ab4:	003262e4 	.word	0x003262e4
+  325ab8:	003261a8 	.word	0x003261a8
+  325abc:	000098f0 	.word	0x000098f0
+  325ac0:	003262fc 	.word	0x003262fc
+  325ac4:	0031e860 	.word	0x0031e860
+
+00325ac8 <snakePrintInitial>:
+  325ac8:	eb000288 	bl	3264f0 <InterruptEnable>
+  325acc:	e59f0838 	ldr	r0, [pc, #2104]	; 32630c <valuePack+0x8>
+  325ad0:	eb000298 	bl	326538 <waitingTime>
+  325ad4:	eb000293 	bl	326528 <waitEnable>
+  325ad8:	e59fb830 	ldr	fp, [pc, #2096]	; 326310 <valuePack+0xc>
+  325adc:	e3a09000 	mov	r9, #0
+  325ae0:	e3a04040 	mov	r4, #64	; 0x40
+  325ae4:	e3a05d0a 	mov	r5, #640	; 0x280
+  325ae8:	e1a06004 	mov	r6, r4
+  325aec:	e1a07005 	mov	r7, r5
+  325af0:	e59f881c 	ldr	r8, [pc, #2076]	; 326314 <valuePack+0x10>
+  325af4:	eb000333 	bl	3267c8 <drawCell>
+  325af8:	e78b4009 	str	r4, [fp, r9]
+  325afc:	e2899004 	add	r9, r9, #4
+  325b00:	e78b5009 	str	r5, [fp, r9]
+  325b04:	e2899004 	add	r9, r9, #4
+  325b08:	e3a04060 	mov	r4, #96	; 0x60
+  325b0c:	e3a05d0a 	mov	r5, #640	; 0x280
+  325b10:	e1a06004 	mov	r6, r4
+  325b14:	e1a07005 	mov	r7, r5
+  325b18:	e59f87f4 	ldr	r8, [pc, #2036]	; 326314 <valuePack+0x10>
+  325b1c:	eb000329 	bl	3267c8 <drawCell>
+  325b20:	e78b4009 	str	r4, [fp, r9]
+  325b24:	e2899004 	add	r9, r9, #4
+  325b28:	e78b5009 	str	r5, [fp, r9]
+  325b2c:	e2899004 	add	r9, r9, #4
+  325b30:	e3a04080 	mov	r4, #128	; 0x80
+  325b34:	e3a05d0a 	mov	r5, #640	; 0x280
+  325b38:	e1a06004 	mov	r6, r4
+  325b3c:	e1a07005 	mov	r7, r5
+  325b40:	e59f87cc 	ldr	r8, [pc, #1996]	; 326314 <valuePack+0x10>
+  325b44:	eb00031f 	bl	3267c8 <drawCell>
+  325b48:	e78b4009 	str	r4, [fp, r9]
+  325b4c:	e2899004 	add	r9, r9, #4
+  325b50:	e78b5009 	str	r5, [fp, r9]
+  325b54:	e2899004 	add	r9, r9, #4
+  325b58:	e3a0a000 	mov	sl, #0
+  325b5c:	eb000160 	bl	3260e4 <randomNumber>
+  325b60:	e59f27b0 	ldr	r2, [pc, #1968]	; 326318 <valuePack+0x14>
+  325b64:	e5926000 	ldr	r6, [r2]
+  325b68:	e5927004 	ldr	r7, [r2, #4]
+  325b6c:	e59f27a8 	ldr	r2, [pc, #1960]	; 32631c <valuePack+0x18>
+  325b70:	e5826000 	str	r6, [r2]
+  325b74:	e5827004 	str	r7, [r2, #4]
+  325b78:	e3a02000 	mov	r2, #0
+  325b7c:	eb00012d 	bl	326038 <printApple>
+  325b80:	ea000048 	b	325ca8 <snakeMovement>
+
+00325b84 <queueReset>:
+  325b84:	e92d40c0 	push	{r6, r7, lr}
+  325b88:	e3a02000 	mov	r2, #0
+
+00325b8c <resetLoop>:
+  325b8c:	e15a0009 	cmp	sl, r9
+  325b90:	b79b600a 	ldrlt	r6, [fp, sl]
+  325b94:	b78b6002 	strlt	r6, [fp, r2]
+  325b98:	b28aa004 	addlt	sl, sl, #4
+  325b9c:	b2822004 	addlt	r2, r2, #4
+  325ba0:	b79b700a 	ldrlt	r7, [fp, sl]
+  325ba4:	b78b7002 	strlt	r7, [fp, r2]
+  325ba8:	b28aa004 	addlt	sl, sl, #4
+  325bac:	b2822004 	addlt	r2, r2, #4
+  325bb0:	bafffff5 	blt	325b8c <resetLoop>
+  325bb4:	e1a09002 	mov	r9, r2
+  325bb8:	e3a0a000 	mov	sl, #0
+  325bbc:	e8bd40c0 	pop	{r6, r7, lr}
+  325bc0:	e12fff1e 	bx	lr
+
+00325bc4 <storeQueue>:
+  325bc4:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+  325bc8:	e78b4009 	str	r4, [fp, r9]
+  325bcc:	e2899004 	add	r9, r9, #4
+  325bd0:	e78b5009 	str	r5, [fp, r9]
+  325bd4:	e2899004 	add	r9, r9, #4
+  325bd8:	e3590f4a 	cmp	r9, #296	; 0x128
+  325bdc:	ba000000 	blt	325be4 <snakePrint>
+  325be0:	ebffffe7 	bl	325b84 <queueReset>
+
+00325be4 <snakePrint>:
+  325be4:	e1a06004 	mov	r6, r4
+  325be8:	e1a07005 	mov	r7, r5
+  325bec:	e1a00006 	mov	r0, r6
+  325bf0:	e1a01007 	mov	r1, r7
+  325bf4:	eb000099 	bl	325e60 <collision>
+  325bf8:	e3500003 	cmp	r0, #3
+  325bfc:	0a0000fc 	beq	325ff4 <printGameWon>
+  325c00:	e3700001 	cmn	r0, #1
+  325c04:	059f0714 	ldreq	r0, [pc, #1812]	; 326320 <valuePack+0x1c>
+  325c08:	05901000 	ldreq	r1, [r0]
+  325c0c:	02411001 	subeq	r1, r1, #1
+  325c10:	05801000 	streq	r1, [r0]
+  325c14:	e1a03000 	mov	r3, r0
+  325c18:	0a0000dc 	beq	325f90 <lives>
+  325c1c:	e3500004 	cmp	r0, #4
+  325c20:	e59f06f8 	ldr	r0, [pc, #1784]	; 326320 <valuePack+0x1c>
+  325c24:	e5901000 	ldr	r1, [r0]
+  325c28:	02811001 	addeq	r1, r1, #1
+  325c2c:	05801000 	streq	r1, [r0]
+  325c30:	e1a00001 	mov	r0, r1
+  325c34:	eb00028c 	bl	32666c <lifePrint>
+  325c38:	e59f86d4 	ldr	r8, [pc, #1748]	; 326314 <valuePack+0x10>
+  325c3c:	eb0002e1 	bl	3267c8 <drawCell>
+  325c40:	e1a00003 	mov	r0, r3
+  325c44:	eb000005 	bl	325c60 <appleGenerator>
+  325c48:	e92d4005 	push	{r0, r2, lr}
+  325c4c:	e59f36d0 	ldr	r3, [pc, #1744]	; 326324 <valuePack+0x20>
+  325c50:	eb00036e 	bl	326a10 <wait>
+  325c54:	e8bd4005 	pop	{r0, r2, lr}
+  325c58:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
+  325c5c:	e12fff1e 	bx	lr
+
+00325c60 <appleGenerator>:
+  325c60:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  325c64:	e3500002 	cmp	r0, #2
+  325c68:	0a000000 	beq	325c70 <appleGenerate>
+  325c6c:	1a00000a 	bne	325c9c <noGenerate>
+
+00325c70 <appleGenerate>:
+  325c70:	eb00011b 	bl	3260e4 <randomNumber>
+  325c74:	e59f569c 	ldr	r5, [pc, #1692]	; 326318 <valuePack+0x14>
+  325c78:	e5956000 	ldr	r6, [r5]
+  325c7c:	e5957004 	ldr	r7, [r5, #4]
+  325c80:	e59f5694 	ldr	r5, [pc, #1684]	; 32631c <valuePack+0x18>
+  325c84:	e5856000 	str	r6, [r5]
+  325c88:	e5857004 	str	r7, [r5, #4]
+  325c8c:	e3a02001 	mov	r2, #1
+  325c90:	eb0000e8 	bl	326038 <printApple>
+  325c94:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  325c98:	e12fff1e 	bx	lr
+
+00325c9c <noGenerate>:
+  325c9c:	eb000066 	bl	325e3c <tailReplace>
+  325ca0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  325ca4:	e12fff1e 	bx	lr
+
+00325ca8 <snakeMovement>:
+  325ca8:	eb00035f 	bl	326a2c <Read_SNES>
+  325cac:	e3500005 	cmp	r0, #5
+  325cb0:	059f1670 	ldreq	r1, [pc, #1648]	; 326328 <valuePack+0x24>
+  325cb4:	05810004 	streq	r0, [r1, #4]
+  325cb8:	0a000026 	beq	325d58 <snakeUp>
+  325cbc:	e3500006 	cmp	r0, #6
+  325cc0:	059f1660 	ldreq	r1, [pc, #1632]	; 326328 <valuePack+0x24>
+  325cc4:	05810004 	streq	r0, [r1, #4]
+  325cc8:	0a000030 	beq	325d90 <snakeDown>
+  325ccc:	e3500008 	cmp	r0, #8
+  325cd0:	059f1650 	ldreq	r1, [pc, #1616]	; 326328 <valuePack+0x24>
+  325cd4:	05810004 	streq	r0, [r1, #4]
+  325cd8:	0a000002 	beq	325ce8 <snakeRight>
+  325cdc:	e3500004 	cmp	r0, #4
+  325ce0:	0a000038 	beq	325dc8 <pause>
+  325ce4:	eaffffef 	b	325ca8 <snakeMovement>
+
+00325ce8 <snakeRight>:
+  325ce8:	e2844020 	add	r4, r4, #32
+  325cec:	ebffffb4 	bl	325bc4 <storeQueue>
+  325cf0:	eb00034d 	bl	326a2c <Read_SNES>
+  325cf4:	e3500005 	cmp	r0, #5
+  325cf8:	059f1628 	ldreq	r1, [pc, #1576]	; 326328 <valuePack+0x24>
+  325cfc:	05810004 	streq	r0, [r1, #4]
+  325d00:	0a000014 	beq	325d58 <snakeUp>
+  325d04:	e3500006 	cmp	r0, #6
+  325d08:	059f1618 	ldreq	r1, [pc, #1560]	; 326328 <valuePack+0x24>
+  325d0c:	05810004 	streq	r0, [r1, #4]
+  325d10:	0a00001e 	beq	325d90 <snakeDown>
+  325d14:	e3500004 	cmp	r0, #4
+  325d18:	0a00002a 	beq	325dc8 <pause>
+  325d1c:	eafffff1 	b	325ce8 <snakeRight>
+
+00325d20 <snakeLeft>:
+  325d20:	e2444020 	sub	r4, r4, #32
+  325d24:	ebffffa6 	bl	325bc4 <storeQueue>
+  325d28:	eb00033f 	bl	326a2c <Read_SNES>
+  325d2c:	e3500005 	cmp	r0, #5
+  325d30:	059f15f0 	ldreq	r1, [pc, #1520]	; 326328 <valuePack+0x24>
+  325d34:	05810004 	streq	r0, [r1, #4]
+  325d38:	0a000006 	beq	325d58 <snakeUp>
+  325d3c:	e3500006 	cmp	r0, #6
+  325d40:	059f15e0 	ldreq	r1, [pc, #1504]	; 326328 <valuePack+0x24>
+  325d44:	05810004 	streq	r0, [r1, #4]
+  325d48:	0a000010 	beq	325d90 <snakeDown>
+  325d4c:	e3500004 	cmp	r0, #4
+  325d50:	0a00001c 	beq	325dc8 <pause>
+  325d54:	eafffff1 	b	325d20 <snakeLeft>
+
+00325d58 <snakeUp>:
+  325d58:	e2455020 	sub	r5, r5, #32
+  325d5c:	ebffff98 	bl	325bc4 <storeQueue>
+  325d60:	eb000331 	bl	326a2c <Read_SNES>
+  325d64:	e3500007 	cmp	r0, #7
+  325d68:	059f15b8 	ldreq	r1, [pc, #1464]	; 326328 <valuePack+0x24>
+  325d6c:	05810004 	streq	r0, [r1, #4]
+  325d70:	0affffea 	beq	325d20 <snakeLeft>
+  325d74:	e3500008 	cmp	r0, #8
+  325d78:	059f15a8 	ldreq	r1, [pc, #1448]	; 326328 <valuePack+0x24>
+  325d7c:	05810004 	streq	r0, [r1, #4]
+  325d80:	0affffd8 	beq	325ce8 <snakeRight>
+  325d84:	e3500004 	cmp	r0, #4
+  325d88:	0a00000e 	beq	325dc8 <pause>
+  325d8c:	eafffff1 	b	325d58 <snakeUp>
+
+00325d90 <snakeDown>:
+  325d90:	e2855020 	add	r5, r5, #32
+  325d94:	ebffff8a 	bl	325bc4 <storeQueue>
+  325d98:	eb000323 	bl	326a2c <Read_SNES>
+  325d9c:	e3500007 	cmp	r0, #7
+  325da0:	059f1580 	ldreq	r1, [pc, #1408]	; 326328 <valuePack+0x24>
+  325da4:	05810004 	streq	r0, [r1, #4]
+  325da8:	0affffdc 	beq	325d20 <snakeLeft>
+  325dac:	e3500008 	cmp	r0, #8
+  325db0:	059f1570 	ldreq	r1, [pc, #1392]	; 326328 <valuePack+0x24>
+  325db4:	05810004 	streq	r0, [r1, #4]
+  325db8:	0affffca 	beq	325ce8 <snakeRight>
+  325dbc:	e3500004 	cmp	r0, #4
+  325dc0:	0a000000 	beq	325dc8 <pause>
+  325dc4:	eafffff1 	b	325d90 <snakeDown>
+
+00325dc8 <pause>:
+  325dc8:	eb0001cd 	bl	326504 <disableInterrupt>
+  325dcc:	e59f4554 	ldr	r4, [pc, #1364]	; 326328 <valuePack+0x24>
+  325dd0:	e3a05001 	mov	r5, #1
+  325dd4:	e5845000 	str	r5, [r4]
+  325dd8:	e5849008 	str	r9, [r4, #8]
+  325ddc:	e584a00c 	str	sl, [r4, #12]
+  325de0:	e59f8544 	ldr	r8, [pc, #1348]	; 32632c <valuePack+0x28>
+  325de4:	e3a06d05 	mov	r6, #320	; 0x140
+  325de8:	e3a07f4b 	mov	r7, #300	; 0x12c
+  325dec:	e59f953c 	ldr	r9, [pc, #1340]	; 326330 <valuePack+0x2c>
+  325df0:	e3a0a0d9 	mov	sl, #217	; 0xd9
+  325df4:	eb00025f 	bl	326778 <drawGame>
+
+00325df8 <pauseLoop>:
+  325df8:	e92d4005 	push	{r0, r2, lr}
+  325dfc:	e59f3520 	ldr	r3, [pc, #1312]	; 326324 <valuePack+0x20>
+  325e00:	eb000302 	bl	326a10 <wait>
+  325e04:	e8bd4005 	pop	{r0, r2, lr}
+  325e08:	e5940004 	ldr	r0, [r4, #4]
+  325e0c:	eb000306 	bl	326a2c <Read_SNES>
+  325e10:	e3500004 	cmp	r0, #4
+  325e14:	0afffe95 	beq	325870 <backGround>
+  325e18:	e3500001 	cmp	r0, #1
+  325e1c:	03a05000 	moveq	r5, #0
+  325e20:	05845000 	streq	r5, [r4]
+  325e24:	0a0002a4 	beq	3268bc <clearScreen>
+  325e28:	e3500009 	cmp	r0, #9
+  325e2c:	03a05000 	moveq	r5, #0
+  325e30:	05845000 	streq	r5, [r4]
+  325e34:	0a000230 	beq	3266fc <main>
+  325e38:	eaffffee 	b	325df8 <pauseLoop>
+
+00325e3c <tailReplace>:
+  325e3c:	e92d41c0 	push	{r6, r7, r8, lr}
+  325e40:	e79b600a 	ldr	r6, [fp, sl]
+  325e44:	e28aa004 	add	sl, sl, #4
+  325e48:	e79b700a 	ldr	r7, [fp, sl]
+  325e4c:	e28aa004 	add	sl, sl, #4
+  325e50:	e59f84dc 	ldr	r8, [pc, #1244]	; 326334 <valuePack+0x30>
+  325e54:	eb00025b 	bl	3267c8 <drawCell>
+  325e58:	e8bd41c0 	pop	{r6, r7, r8, lr}
+  325e5c:	e12fff1e 	bx	lr
+
+00325e60 <collision>:
+  325e60:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  325e64:	e3510020 	cmp	r1, #32
+  325e68:	da00003b 	ble	325f5c <returnCollision>
+  325e6c:	e3500e3e 	cmp	r0, #992	; 0x3e0
+  325e70:	aa000039 	bge	325f5c <returnCollision>
+  325e74:	e350001f 	cmp	r0, #31
+  325e78:	da000037 	ble	325f5c <returnCollision>
+  325e7c:	e3510e2e 	cmp	r1, #736	; 0x2e0
+  325e80:	aa000035 	bge	325f5c <returnCollision>
+  325e84:	e59fb4ac 	ldr	fp, [pc, #1196]	; 326338 <valuePack+0x34>
+
+00325e88 <collisionBlock>:
+  325e88:	e49b4004 	ldr	r4, [fp], #4
+  325e8c:	e3540000 	cmp	r4, #0
+  325e90:	059fb478 	ldreq	fp, [pc, #1144]	; 326310 <valuePack+0xc>
+  325e94:	02499008 	subeq	r9, r9, #8
+  325e98:	0a000006 	beq	325eb8 <snakeCollision>
+  325e9c:	e49b5004 	ldr	r5, [fp], #4
+  325ea0:	e1500004 	cmp	r0, r4
+  325ea4:	0a000000 	beq	325eac <checkY>
+  325ea8:	eafffff6 	b	325e88 <collisionBlock>
+
+00325eac <checkY>:
+  325eac:	e1550001 	cmp	r5, r1
+  325eb0:	1afffff4 	bne	325e88 <collisionBlock>
+  325eb4:	0a000028 	beq	325f5c <returnCollision>
+
+00325eb8 <snakeCollision>:
+  325eb8:	e15a0009 	cmp	sl, r9
+  325ebc:	a1a09000 	movge	r9, r0
+  325ec0:	a1a0a001 	movge	sl, r1
+  325ec4:	aa000009 	bge	325ef0 <collisionDoor>
+  325ec8:	e79b400a 	ldr	r4, [fp, sl]
+  325ecc:	e28aa004 	add	sl, sl, #4
+  325ed0:	e79b500a 	ldr	r5, [fp, sl]
+  325ed4:	e28aa004 	add	sl, sl, #4
+  325ed8:	e1500004 	cmp	r0, r4
+  325edc:	0a000000 	beq	325ee4 <snakeCollisionY>
+  325ee0:	eafffff4 	b	325eb8 <snakeCollision>
+
+00325ee4 <snakeCollisionY>:
+  325ee4:	e1550001 	cmp	r5, r1
+  325ee8:	0a00001b 	beq	325f5c <returnCollision>
+  325eec:	eafffff1 	b	325eb8 <snakeCollision>
+
+00325ef0 <collisionDoor>:
+  325ef0:	e59f6444 	ldr	r6, [pc, #1092]	; 32633c <valuePack+0x38>
+  325ef4:	e5964000 	ldr	r4, [r6]
+  325ef8:	e5965004 	ldr	r5, [r6, #4]
+  325efc:	e1500004 	cmp	r0, r4
+  325f00:	0a000000 	beq	325f08 <doorCollisionY>
+  325f04:	1a000001 	bne	325f10 <collisionApple>
+
+00325f08 <doorCollisionY>:
+  325f08:	e1550001 	cmp	r5, r1
+  325f0c:	0a000018 	beq	325f74 <returnDoorCollision>
+
+00325f10 <collisionApple>:
+  325f10:	e59f0404 	ldr	r0, [pc, #1028]	; 32631c <valuePack+0x18>
+  325f14:	e5901000 	ldr	r1, [r0]
+  325f18:	e5902004 	ldr	r2, [r0, #4]
+  325f1c:	e1590001 	cmp	r9, r1
+  325f20:	0a000000 	beq	325f28 <collisionAppleY>
+  325f24:	ea000001 	b	325f30 <collisionPack>
+
+00325f28 <collisionAppleY>:
+  325f28:	e15a0002 	cmp	sl, r2
+  325f2c:	0a00000d 	beq	325f68 <returnAppleCollision>
+
+00325f30 <collisionPack>:
+  325f30:	e59f0408 	ldr	r0, [pc, #1032]	; 326340 <valuePack+0x3c>
+  325f34:	e5901000 	ldr	r1, [r0]
+  325f38:	e5902004 	ldr	r2, [r0, #4]
+  325f3c:	e1590001 	cmp	r9, r1
+  325f40:	0a000000 	beq	325f48 <collisionPackY>
+  325f44:	ea000001 	b	325f50 <noCollision>
+
+00325f48 <collisionPackY>:
+  325f48:	e15a0002 	cmp	sl, r2
+  325f4c:	0a00000b 	beq	325f80 <returnPackCollision>
+
+00325f50 <noCollision>:
+  325f50:	e3a00000 	mov	r0, #0
+  325f54:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  325f58:	e12fff1e 	bx	lr
+
+00325f5c <returnCollision>:
+  325f5c:	e3e00000 	mvn	r0, #0
+  325f60:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  325f64:	e12fff1e 	bx	lr
+
+00325f68 <returnAppleCollision>:
+  325f68:	e3a00002 	mov	r0, #2
+  325f6c:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  325f70:	e12fff1e 	bx	lr
+
+00325f74 <returnDoorCollision>:
+  325f74:	e3a00003 	mov	r0, #3
+  325f78:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  325f7c:	e12fff1e 	bx	lr
+
+00325f80 <returnPackCollision>:
+  325f80:	eb00015f 	bl	326504 <disableInterrupt>
+  325f84:	e3a00004 	mov	r0, #4
+  325f88:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  325f8c:	e12fff1e 	bx	lr
+
+00325f90 <lives>:
+  325f90:	e3510000 	cmp	r1, #0
+  325f94:	da000005 	ble	325fb0 <printGameLost>
+  325f98:	e1a00001 	mov	r0, r1
+  325f9c:	e59f0384 	ldr	r0, [pc, #900]	; 326328 <valuePack+0x24>
+  325fa0:	e3a01000 	mov	r1, #0
+  325fa4:	e5801000 	str	r1, [r0]
+  325fa8:	eb0001af 	bl	32666c <lifePrint>
+  325fac:	eafffe2f 	b	325870 <backGround>
+
+00325fb0 <printGameLost>:
+  325fb0:	eb000153 	bl	326504 <disableInterrupt>
+  325fb4:	e59f8388 	ldr	r8, [pc, #904]	; 326344 <valuePack+0x40>
+  325fb8:	e3a06060 	mov	r6, #96	; 0x60
+  325fbc:	e3a07080 	mov	r7, #128	; 0x80
+  325fc0:	e59f9380 	ldr	r9, [pc, #896]	; 326348 <valuePack+0x44>
+  325fc4:	e3a0ae1e 	mov	sl, #480	; 0x1e0
+  325fc8:	eb0001ea 	bl	326778 <drawGame>
+  325fcc:	e59f0354 	ldr	r0, [pc, #852]	; 326328 <valuePack+0x24>
+  325fd0:	e3a01000 	mov	r1, #0
+  325fd4:	e5801000 	str	r1, [r0]
+  325fd8:	e59f036c 	ldr	r0, [pc, #876]	; 32634c <valuePack+0x48>
+  325fdc:	e3a01000 	mov	r1, #0
+  325fe0:	e5801000 	str	r1, [r0]
+
+00325fe4 <gameLostLoop>:
+  325fe4:	eb000290 	bl	326a2c <Read_SNES>
+  325fe8:	e3500009 	cmp	r0, #9
+  325fec:	0a0001c2 	beq	3266fc <main>
+  325ff0:	eafffffb 	b	325fe4 <gameLostLoop>
+
+00325ff4 <printGameWon>:
+  325ff4:	eb000142 	bl	326504 <disableInterrupt>
+  325ff8:	e59f8350 	ldr	r8, [pc, #848]	; 326350 <valuePack+0x4c>
+  325ffc:	e3a06060 	mov	r6, #96	; 0x60
+  326000:	e3a07080 	mov	r7, #128	; 0x80
+  326004:	e59f9348 	ldr	r9, [pc, #840]	; 326354 <valuePack+0x50>
+  326008:	e3a0af75 	mov	sl, #468	; 0x1d4
+  32600c:	eb0001d9 	bl	326778 <drawGame>
+  326010:	e59f0310 	ldr	r0, [pc, #784]	; 326328 <valuePack+0x24>
+  326014:	e3a01000 	mov	r1, #0
+  326018:	e5801000 	str	r1, [r0]
+  32601c:	e59f0328 	ldr	r0, [pc, #808]	; 32634c <valuePack+0x48>
+  326020:	e3a01000 	mov	r1, #0
+  326024:	e5801000 	str	r1, [r0]
+
+00326028 <gameWonLoop>:
+  326028:	eb00027f 	bl	326a2c <Read_SNES>
+  32602c:	e3500009 	cmp	r0, #9
+  326030:	0a0001b1 	beq	3266fc <main>
+  326034:	eafffffb 	b	326028 <gameWonLoop>
+
+00326038 <printApple>:
+  326038:	e92d4fe0 	push	{r5, r6, r7, r8, r9, sl, fp, lr}
+  32603c:	e3520000 	cmp	r2, #0
+  326040:	0a000010 	beq	326088 <printAppleExit>
+  326044:	e59f9300 	ldr	r9, [pc, #768]	; 32634c <valuePack+0x48>
+  326048:	e599a000 	ldr	sl, [r9]
+  32604c:	e28aa001 	add	sl, sl, #1
+  326050:	e589a000 	str	sl, [r9]
+  326054:	e1a0000a 	mov	r0, sl
+  326058:	e3a0100a 	mov	r1, #10
+  32605c:	eb000046 	bl	32617c <div>
+  326060:	e1a05000 	mov	r5, r0
+  326064:	e1a00001 	mov	r0, r1
+  326068:	e3a06c01 	mov	r6, #256	; 0x100
+  32606c:	eb000165 	bl	326608 <scorePrint>
+  326070:	e1a00005 	mov	r0, r5
+  326074:	e3a0100a 	mov	r1, #10
+  326078:	eb00003f 	bl	32617c <div>
+  32607c:	e1a00001 	mov	r0, r1
+  326080:	e3a060e0 	mov	r6, #224	; 0xe0
+  326084:	eb00015f 	bl	326608 <scorePrint>
+
+00326088 <printAppleExit>:
+  326088:	e59f528c 	ldr	r5, [pc, #652]	; 32631c <valuePack+0x18>
+  32608c:	e5956000 	ldr	r6, [r5]
+  326090:	e5957004 	ldr	r7, [r5, #4]
+  326094:	e59f82bc 	ldr	r8, [pc, #700]	; 326358 <valuePack+0x54>
+  326098:	eb0001ca 	bl	3267c8 <drawCell>
+  32609c:	e35a0014 	cmp	sl, #20
+  3260a0:	ba000001 	blt	3260ac <appleReturn>
+  3260a4:	ca000000 	bgt	3260ac <appleReturn>
+  3260a8:	eb000001 	bl	3260b4 <drawDoor>
+
+003260ac <appleReturn>:
+  3260ac:	e8bd4fe0 	pop	{r5, r6, r7, r8, r9, sl, fp, lr}
+  3260b0:	e12fff1e 	bx	lr
+
+003260b4 <drawDoor>:
+  3260b4:	e92d47e0 	push	{r5, r6, r7, r8, r9, sl, lr}
+  3260b8:	eb000009 	bl	3260e4 <randomNumber>
+  3260bc:	e59f5254 	ldr	r5, [pc, #596]	; 326318 <valuePack+0x14>
+  3260c0:	e5956000 	ldr	r6, [r5]
+  3260c4:	e5957004 	ldr	r7, [r5, #4]
+  3260c8:	e59f526c 	ldr	r5, [pc, #620]	; 32633c <valuePack+0x38>
+  3260cc:	e5856000 	str	r6, [r5]
+  3260d0:	e5857004 	str	r7, [r5, #4]
+  3260d4:	e59f8280 	ldr	r8, [pc, #640]	; 32635c <valuePack+0x58>
+  3260d8:	eb0001ba 	bl	3267c8 <drawCell>
+  3260dc:	e8bd47e0 	pop	{r5, r6, r7, r8, r9, sl, lr}
+  3260e0:	e12fff1e 	bx	lr
+
+003260e4 <randomNumber>:
+  3260e4:	e92d40f0 	push	{r4, r5, r6, r7, lr}
+
+003260e8 <randomNumberLoop>:
+  3260e8:	e59f0270 	ldr	r0, [pc, #624]	; 326360 <valuePack+0x5c>
+  3260ec:	e5900000 	ldr	r0, [r0]
+  3260f0:	e3a01001 	mov	r1, #1
+  3260f4:	e3a02003 	mov	r2, #3
+  3260f8:	e3a03009 	mov	r3, #9
+  3260fc:	e1a04000 	mov	r4, r0
+  326100:	e1a04584 	lsl	r4, r4, #11
+  326104:	e0200004 	eor	r0, r0, r4
+  326108:	e1a04424 	lsr	r4, r4, #8
+  32610c:	e0200004 	eor	r0, r0, r4
+  326110:	e1a00001 	mov	r0, r1
+  326114:	e1a01002 	mov	r1, r2
+  326118:	e1a02003 	mov	r2, r3
+  32611c:	e1a039a3 	lsr	r3, r3, #19
+  326120:	e0233004 	eor	r3, r3, r4
+  326124:	e1a04a04 	lsl	r4, r4, #20
+  326128:	e1a04a24 	lsr	r4, r4, #20
+  32612c:	e1a00004 	mov	r0, r4
+  326130:	e3a0101e 	mov	r1, #30
+  326134:	eb000010 	bl	32617c <div>
+  326138:	e1a01281 	lsl	r1, r1, #5
+  32613c:	e1a06001 	mov	r6, r1
+  326140:	e1a00004 	mov	r0, r4
+  326144:	e3a01015 	mov	r1, #21
+  326148:	eb00000b 	bl	32617c <div>
+  32614c:	e1a01281 	lsl	r1, r1, #5
+  326150:	e1a07001 	mov	r7, r1
+  326154:	e1a00006 	mov	r0, r6
+  326158:	e1a01007 	mov	r1, r7
+  32615c:	ebffff3f 	bl	325e60 <collision>
+  326160:	e3700001 	cmn	r0, #1
+  326164:	0affffdf 	beq	3260e8 <randomNumberLoop>
+  326168:	e59f01a8 	ldr	r0, [pc, #424]	; 326318 <valuePack+0x14>
+  32616c:	e5806000 	str	r6, [r0]
+  326170:	e5807004 	str	r7, [r0, #4]
+  326174:	e8bd40f0 	pop	{r4, r5, r6, r7, lr}
+  326178:	e12fff1e 	bx	lr
+
+0032617c <div>:
+  32617c:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326180:	e3a03000 	mov	r3, #0
+
+00326184 <div_Loop>:
+  326184:	e1500001 	cmp	r0, r1
+  326188:	ba000002 	blt	326198 <exitDiv>
+  32618c:	e0400001 	sub	r0, r0, r1
+  326190:	e2833001 	add	r3, r3, #1
+  326194:	eafffffa 	b	326184 <div_Loop>
+
+00326198 <exitDiv>:
+  326198:	e1a01000 	mov	r1, r0
+  32619c:	e1a00003 	mov	r0, r3
+  3261a0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  3261a4:	e12fff1e 	bx	lr
+
+003261a8 <tracker>:
+	...
+
+003262d4 <lifeCounter>:
+  3262d4:	00000000 	.word	0x00000000
+
+003262d8 <randomLocation>:
+	...
+
+003262e0 <score>:
+  3262e0:	00000000 	.word	0x00000000
+
+003262e4 <pauseFlag>:
+	...
+
+003262f4 <doorLocation>:
+	...
+
+003262fc <appleLocation>:
+	...
+
+00326304 <valuePack>:
+	...
+  32630c:	01c9c380 	.word	0x01c9c380
+  326310:	003261a8 	.word	0x003261a8
+  326314:	000098f0 	.word	0x000098f0
+  326318:	003262d8 	.word	0x003262d8
+  32631c:	003262fc 	.word	0x003262fc
+  326320:	003262d4 	.word	0x003262d4
+  326324:	000186a0 	.word	0x000186a0
+  326328:	003262e4 	.word	0x003262e4
+  32632c:	0000a8f0 	.word	0x0000a8f0
+  326330:	00000167 	.word	0x00000167
+  326334:	00325070 	.word	0x00325070
+  326338:	00009080 	.word	0x00009080
+  32633c:	003262f4 	.word	0x003262f4
+  326340:	00326304 	.word	0x00326304
+  326344:	00031610 	.word	0x00031610
+  326348:	00000321 	.word	0x00000321
+  32634c:	003262e0 	.word	0x003262e0
+  326350:	000ee410 	.word	0x000ee410
+  326354:	000002ed 	.word	0x000002ed
+  326358:	0031e860 	.word	0x0031e860
+  32635c:	0031d860 	.word	0x0031d860
+  326360:	20003004 	.word	0x20003004
+
+00326364 <EnableJTAG>:
+  326364:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326368:	e59f0064 	ldr	r0, [pc, #100]	; 3263d4 <dowaitloop+0xc>
+  32636c:	e0211001 	eor	r1, r1, r1
+  326370:	e5801000 	str	r1, [r0]
+  326374:	eb000012 	bl	3263c4 <dowait>
+  326378:	e59f0058 	ldr	r0, [pc, #88]	; 3263d8 <dowaitloop+0x10>
+  32637c:	e59f1058 	ldr	r1, [pc, #88]	; 3263dc <dowaitloop+0x14>
+  326380:	e5801000 	str	r1, [r0]
+  326384:	eb00000e 	bl	3263c4 <dowait>
+  326388:	e0211001 	eor	r1, r1, r1
+  32638c:	e5801000 	str	r1, [r0]
+  326390:	e59f0048 	ldr	r0, [pc, #72]	; 3263e0 <dowaitloop+0x18>
+  326394:	e5901000 	ldr	r1, [r0]
+  326398:	e3c11a07 	bic	r1, r1, #28672	; 0x7000
+  32639c:	e3811a02 	orr	r1, r1, #8192	; 0x2000
+  3263a0:	e5801000 	str	r1, [r0]
+  3263a4:	e59f0038 	ldr	r0, [pc, #56]	; 3263e4 <dowaitloop+0x1c>
+  3263a8:	e5901000 	ldr	r1, [r0]
+  3263ac:	e59f2034 	ldr	r2, [pc, #52]	; 3263e8 <dowaitloop+0x20>
+  3263b0:	e1c11002 	bic	r1, r1, r2
+  3263b4:	e59f2030 	ldr	r2, [pc, #48]	; 3263ec <dowaitloop+0x24>
+  3263b8:	e1811002 	orr	r1, r1, r2
+  3263bc:	e5801000 	str	r1, [r0]
+  3263c0:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+003263c4 <dowait>:
+  3263c4:	e3a02f4b 	mov	r2, #300	; 0x12c
+
+003263c8 <dowaitloop>:
+  3263c8:	e2522001 	subs	r2, r2, #1
+  3263cc:	1afffffd 	bne	3263c8 <dowaitloop>
+  3263d0:	e12fff1e 	bx	lr
+  3263d4:	20200094 	.word	0x20200094
+  3263d8:	20200098 	.word	0x20200098
+  3263dc:	0bc00010 	.word	0x0bc00010
+  3263e0:	20200000 	.word	0x20200000
+  3263e4:	20200008 	.word	0x20200008
+  3263e8:	00e3ffc0 	.word	0x00e3ffc0
+  3263ec:	0061b6c0 	.word	0x0061b6c0
+
+003263f0 <InitFrameBuffer>:
+  3263f0:	e92d4010 	push	{r4, lr}
+  3263f4:	e59f40e8 	ldr	r4, [pc, #232]	; 3264e4 <rightmail$+0x24>
+  3263f8:	e1a00004 	mov	r0, r4
+  3263fc:	e2800101 	add	r0, r0, #1073741824	; 0x40000000
+  326400:	e3a01001 	mov	r1, #1
+  326404:	eb00001d 	bl	326480 <MailboxWrite>
+  326408:	e3a00001 	mov	r0, #1
+  32640c:	eb000027 	bl	3264b0 <MailboxRead>
+  326410:	e3300000 	teq	r0, #0
+  326414:	13a00000 	movne	r0, #0
+  326418:	18bd8010 	popne	{r4, pc}
+
+0032641c <pointerWait$>:
+  32641c:	e5940020 	ldr	r0, [r4, #32]
+  326420:	e3300000 	teq	r0, #0
+  326424:	0afffffc 	beq	32641c <pointerWait$>
+  326428:	e59f10b8 	ldr	r1, [pc, #184]	; 3264e8 <rightmail$+0x28>
+  32642c:	e5810000 	str	r0, [r1]
+  326430:	e1a00004 	mov	r0, r4
+  326434:	e8bd8010 	pop	{r4, pc}
+
+00326438 <DrawPixel>:
+  326438:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+  32643c:	e59f30a0 	ldr	r3, [pc, #160]	; 3264e4 <rightmail$+0x24>
+  326440:	e5934004 	ldr	r4, [r3, #4]
+  326444:	e2444001 	sub	r4, r4, #1
+  326448:	e1510004 	cmp	r1, r4
+  32644c:	8a000009 	bhi	326478 <DrawPixelEnd$>
+  326450:	e5934000 	ldr	r4, [r3]
+  326454:	e2444001 	sub	r4, r4, #1
+  326458:	e1500004 	cmp	r0, r4
+  32645c:	8a000005 	bhi	326478 <DrawPixelEnd$>
+  326460:	e59f3080 	ldr	r3, [pc, #128]	; 3264e8 <rightmail$+0x28>
+  326464:	e5933000 	ldr	r3, [r3]
+  326468:	e2844001 	add	r4, r4, #1
+  32646c:	e0200491 	mla	r0, r1, r4, r0
+  326470:	e0833080 	add	r3, r3, r0, lsl #1
+  326474:	e1c320b0 	strh	r2, [r3]
+
+00326478 <DrawPixelEnd$>:
+  326478:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
+  32647c:	e12fff1e 	bx	lr
+
+00326480 <MailboxWrite>:
+  326480:	e310000f 	tst	r0, #15
+  326484:	11a0f00e 	movne	pc, lr
+  326488:	e351000f 	cmp	r1, #15
+  32648c:	81a0f00e 	movhi	pc, lr
+  326490:	e1a02000 	mov	r2, r0
+  326494:	e59f0050 	ldr	r0, [pc, #80]	; 3264ec <rightmail$+0x2c>
+
+00326498 <wait1$>:
+  326498:	e5903018 	ldr	r3, [r0, #24]
+  32649c:	e3130102 	tst	r3, #-2147483648	; 0x80000000
+  3264a0:	1afffffc 	bne	326498 <wait1$>
+  3264a4:	e0822001 	add	r2, r2, r1
+  3264a8:	e5802020 	str	r2, [r0, #32]
+  3264ac:	e12fff1e 	bx	lr
+
+003264b0 <MailboxRead>:
+  3264b0:	e350000f 	cmp	r0, #15
+  3264b4:	81a0f00e 	movhi	pc, lr
+  3264b8:	e1a01000 	mov	r1, r0
+  3264bc:	e59f0028 	ldr	r0, [pc, #40]	; 3264ec <rightmail$+0x2c>
+
+003264c0 <rightmail$>:
+  3264c0:	e5902018 	ldr	r2, [r0, #24]
+  3264c4:	e3120301 	tst	r2, #67108864	; 0x4000000
+  3264c8:	1afffffc 	bne	3264c0 <rightmail$>
+  3264cc:	e5902000 	ldr	r2, [r0]
+  3264d0:	e202300f 	and	r3, r2, #15
+  3264d4:	e1330001 	teq	r3, r1
+  3264d8:	1afffff8 	bne	3264c0 <rightmail$>
+  3264dc:	e3c2000f 	bic	r0, r2, #15
+  3264e0:	e12fff1e 	bx	lr
+  3264e4:	000ee3e0 	.word	0x000ee3e0
+  3264e8:	000ee408 	.word	0x000ee408
+  3264ec:	2000b880 	.word	0x2000b880
+
+003264f0 <InterruptEnable>:
+  3264f0:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  3264f4:	e10f0000 	mrs	r0, CPSR
+  3264f8:	e3c00080 	bic	r0, r0, #128	; 0x80
+  3264fc:	e121f000 	msr	CPSR_c, r0
+  326500:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+00326504 <disableInterrupt>:
+  326504:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326508:	e59f00d4 	ldr	r0, [pc, #212]	; 3265e4 <hang+0x4>
+  32650c:	e3a01002 	mov	r1, #2
+  326510:	e5801000 	str	r1, [r0]
+  326514:	e59f00cc 	ldr	r0, [pc, #204]	; 3265e8 <hang+0x8>
+  326518:	e5900000 	ldr	r0, [r0]
+  32651c:	e59f10c8 	ldr	r1, [pc, #200]	; 3265ec <hang+0xc>
+  326520:	e5810000 	str	r0, [r1]
+  326524:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+00326528 <waitEnable>:
+  326528:	e59f00c0 	ldr	r0, [pc, #192]	; 3265f0 <hang+0x10>
+  32652c:	e3a01002 	mov	r1, #2
+  326530:	e5801000 	str	r1, [r0]
+  326534:	e12fff1e 	bx	lr
+
+00326538 <waitingTime>:
+  326538:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  32653c:	e59f10a4 	ldr	r1, [pc, #164]	; 3265e8 <hang+0x8>
+  326540:	e5911000 	ldr	r1, [r1]
+  326544:	e0800001 	add	r0, r0, r1
+  326548:	e59f109c 	ldr	r1, [pc, #156]	; 3265ec <hang+0xc>
+  32654c:	e5810000 	str	r0, [r1]
+  326550:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326554:	e12fff1e 	bx	lr
+
+00326558 <IRQ>:
+  326558:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  32655c:	e59f0090 	ldr	r0, [pc, #144]	; 3265f4 <hang+0x14>
+  326560:	e5901000 	ldr	r1, [r0]
+  326564:	e3510000 	cmp	r1, #0
+  326568:	0a00000d 	beq	3265a4 <irqEnd>
+
+0032656c <generateValuePack>:
+  32656c:	ebfffedc 	bl	3260e4 <randomNumber>
+  326570:	e59f2080 	ldr	r2, [pc, #128]	; 3265f8 <hang+0x18>
+  326574:	e5926000 	ldr	r6, [r2]
+  326578:	e5927004 	ldr	r7, [r2, #4]
+  32657c:	e59f2078 	ldr	r2, [pc, #120]	; 3265fc <hang+0x1c>
+  326580:	e5826000 	str	r6, [r2]
+  326584:	e5827004 	str	r7, [r2, #4]
+  326588:	e59f8070 	ldr	r8, [pc, #112]	; 326600 <hang+0x20>
+  32658c:	eb00008d 	bl	3267c8 <drawCell>
+  326590:	e59f005c 	ldr	r0, [pc, #92]	; 3265f4 <hang+0x14>
+  326594:	e3a01002 	mov	r1, #2
+  326598:	e5801000 	str	r1, [r0]
+  32659c:	e5901000 	ldr	r1, [r0]
+  3265a0:	e5801000 	str	r1, [r0]
+
+003265a4 <irqEnd>:
+  3265a4:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  3265a8:	e25ef004 	subs	pc, lr, #4
+
+003265ac <InstallIntTable>:
+  3265ac:	e59f0050 	ldr	r0, [pc, #80]	; 326604 <hang+0x24>
+  3265b0:	e3a01000 	mov	r1, #0
+  3265b4:	e8b003fc 	ldm	r0!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  3265b8:	e8a103fc 	stmia	r1!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  3265bc:	e8b003fc 	ldm	r0!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  3265c0:	e8a103fc 	stmia	r1!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  3265c4:	e3a000d2 	mov	r0, #210	; 0xd2
+  3265c8:	e121f000 	msr	CPSR_c, r0
+  3265cc:	e3a0d902 	mov	sp, #32768	; 0x8000
+  3265d0:	e3a000d3 	mov	r0, #211	; 0xd3
+  3265d4:	e121f000 	msr	CPSR_c, r0
+  3265d8:	e3a0d302 	mov	sp, #134217728	; 0x8000000
+  3265dc:	e12fff1e 	bx	lr
+
+003265e0 <hang>:
+  3265e0:	eafffffe 	b	3265e0 <hang>
+  3265e4:	2000b21c 	.word	0x2000b21c
+  3265e8:	20003004 	.word	0x20003004
+  3265ec:	20003010 	.word	0x20003010
+  3265f0:	2000b210 	.word	0x2000b210
+  3265f4:	20003000 	.word	0x20003000
+  3265f8:	003262d8 	.word	0x003262d8
+  3265fc:	00326304 	.word	0x00326304
+  326600:	0019a060 	.word	0x0019a060
+  326604:	0019a020 	.word	0x0019a020
+
+00326608 <scorePrint>:
+  326608:	e92d41c0 	push	{r6, r7, r8, lr}
+  32660c:	e3a07000 	mov	r7, #0
+  326610:	e3500000 	cmp	r0, #0
+  326614:	059f80b8 	ldreq	r8, [pc, #184]	; 3266d4 <lifePrint+0x68>
+  326618:	e3500001 	cmp	r0, #1
+  32661c:	059f80b4 	ldreq	r8, [pc, #180]	; 3266d8 <lifePrint+0x6c>
+  326620:	e3500002 	cmp	r0, #2
+  326624:	059f80b0 	ldreq	r8, [pc, #176]	; 3266dc <lifePrint+0x70>
+  326628:	e3500003 	cmp	r0, #3
+  32662c:	059f80ac 	ldreq	r8, [pc, #172]	; 3266e0 <lifePrint+0x74>
+  326630:	e3500004 	cmp	r0, #4
+  326634:	059f80a8 	ldreq	r8, [pc, #168]	; 3266e4 <lifePrint+0x78>
+  326638:	e3500005 	cmp	r0, #5
+  32663c:	059f80a4 	ldreq	r8, [pc, #164]	; 3266e8 <lifePrint+0x7c>
+  326640:	e3500006 	cmp	r0, #6
+  326644:	059f80a0 	ldreq	r8, [pc, #160]	; 3266ec <lifePrint+0x80>
+  326648:	e3500007 	cmp	r0, #7
+  32664c:	059f809c 	ldreq	r8, [pc, #156]	; 3266f0 <lifePrint+0x84>
+  326650:	e3500008 	cmp	r0, #8
+  326654:	059f8098 	ldreq	r8, [pc, #152]	; 3266f4 <lifePrint+0x88>
+  326658:	e3500009 	cmp	r0, #9
+  32665c:	059f8094 	ldreq	r8, [pc, #148]	; 3266f8 <lifePrint+0x8c>
+  326660:	eb000058 	bl	3267c8 <drawCell>
+  326664:	e8bd41c0 	pop	{r6, r7, r8, lr}
+  326668:	e12fff1e 	bx	lr
+
+0032666c <lifePrint>:
+  32666c:	e92d41c0 	push	{r6, r7, r8, lr}
+  326670:	e3a06c03 	mov	r6, #768	; 0x300
+  326674:	e3a07000 	mov	r7, #0
+  326678:	e3500000 	cmp	r0, #0
+  32667c:	059f8050 	ldreq	r8, [pc, #80]	; 3266d4 <lifePrint+0x68>
+  326680:	e3500001 	cmp	r0, #1
+  326684:	059f804c 	ldreq	r8, [pc, #76]	; 3266d8 <lifePrint+0x6c>
+  326688:	e3500002 	cmp	r0, #2
+  32668c:	059f8048 	ldreq	r8, [pc, #72]	; 3266dc <lifePrint+0x70>
+  326690:	e3500003 	cmp	r0, #3
+  326694:	059f8044 	ldreq	r8, [pc, #68]	; 3266e0 <lifePrint+0x74>
+  326698:	e3500004 	cmp	r0, #4
+  32669c:	059f8040 	ldreq	r8, [pc, #64]	; 3266e4 <lifePrint+0x78>
+  3266a0:	e3500005 	cmp	r0, #5
+  3266a4:	059f803c 	ldreq	r8, [pc, #60]	; 3266e8 <lifePrint+0x7c>
+  3266a8:	e3500006 	cmp	r0, #6
+  3266ac:	059f8038 	ldreq	r8, [pc, #56]	; 3266ec <lifePrint+0x80>
+  3266b0:	e3500007 	cmp	r0, #7
+  3266b4:	059f8034 	ldreq	r8, [pc, #52]	; 3266f0 <lifePrint+0x84>
+  3266b8:	e3500008 	cmp	r0, #8
+  3266bc:	059f8030 	ldreq	r8, [pc, #48]	; 3266f4 <lifePrint+0x88>
+  3266c0:	e3500009 	cmp	r0, #9
+  3266c4:	059f802c 	ldreq	r8, [pc, #44]	; 3266f8 <lifePrint+0x8c>
+  3266c8:	eb00003e 	bl	3267c8 <drawCell>
+  3266cc:	e8bd41c0 	pop	{r6, r7, r8, lr}
+  3266d0:	e12fff1e 	bx	lr
+  3266d4:	0031e060 	.word	0x0031e060
+  3266d8:	00030e10 	.word	0x00030e10
+  3266dc:	00322860 	.word	0x00322860
+  3266e0:	000090f0 	.word	0x000090f0
+  3266e4:	00324070 	.word	0x00324070
+  3266e8:	000edbe0 	.word	0x000edbe0
+  3266ec:	00324870 	.word	0x00324870
+  3266f0:	0019a860 	.word	0x0019a860
+  3266f4:	0000a0f0 	.word	0x0000a0f0
+  3266f8:	00323070 	.word	0x00323070
+
+003266fc <main>:
+  3266fc:	ebffff18 	bl	326364 <EnableJTAG>
+  326700:	ebffff3a 	bl	3263f0 <InitFrameBuffer>
+  326704:	eb000087 	bl	326928 <Init_GPIO>
+  326708:	e59f01e4 	ldr	r0, [pc, #484]	; 3268f4 <clearScreenLoop+0x24>
+  32670c:	e3a01000 	mov	r1, #0
+  326710:	e5801000 	str	r1, [r0]
+  326714:	e5801004 	str	r1, [r0, #4]
+  326718:	e59f01d8 	ldr	r0, [pc, #472]	; 3268f8 <clearScreenLoop+0x28>
+  32671c:	e3a01005 	mov	r1, #5
+  326720:	e5801000 	str	r1, [r0]
+  326724:	e59f11d0 	ldr	r1, [pc, #464]	; 3268fc <clearScreenLoop+0x2c>
+  326728:	e3a00000 	mov	r0, #0
+  32672c:	e5810000 	str	r0, [r1]
+  326730:	e3a06c01 	mov	r6, #256	; 0x100
+  326734:	ebffffb3 	bl	326608 <scorePrint>
+  326738:	e3a060e0 	mov	r6, #224	; 0xe0
+  32673c:	ebffffb1 	bl	326608 <scorePrint>
+  326740:	e59f81b8 	ldr	r8, [pc, #440]	; 326900 <clearScreenLoop+0x30>
+  326744:	e3a06000 	mov	r6, #0
+  326748:	e3a07000 	mov	r7, #0
+  32674c:	e59f91b0 	ldr	r9, [pc, #432]	; 326904 <clearScreenLoop+0x34>
+  326750:	e59fa1b0 	ldr	sl, [pc, #432]	; 326908 <clearScreenLoop+0x38>
+  326754:	eb000007 	bl	326778 <drawGame>
+  326758:	e59f81ac 	ldr	r8, [pc, #428]	; 32690c <clearScreenLoop+0x3c>
+  32675c:	e59f61ac 	ldr	r6, [pc, #428]	; 326910 <clearScreenLoop+0x40>
+  326760:	e3a07f9a 	mov	r7, #616	; 0x268
+  326764:	e3a0901f 	mov	r9, #31
+  326768:	e3a0a01f 	mov	sl, #31
+  32676c:	eb000001 	bl	326778 <drawGame>
+  326770:	ea000028 	b	326818 <arrowInit>
+
+00326774 <haltLoop$>:
+  326774:	eafffffe 	b	326774 <haltLoop$>
+
+00326778 <drawGame>:
+  326778:	e92d4ff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  32677c:	e1a04006 	mov	r4, r6
+  326780:	e3a05000 	mov	r5, #0
+  326784:	e3a0b000 	mov	fp, #0
+
+00326788 <drawGameLoop>:
+  326788:	e0d820b2 	ldrh	r2, [r8], #2
+  32678c:	e1a00006 	mov	r0, r6
+  326790:	e1a01007 	mov	r1, r7
+  326794:	ebffff27 	bl	326438 <DrawPixel>
+  326798:	e1550009 	cmp	r5, r9
+  32679c:	e2855001 	add	r5, r5, #1
+  3267a0:	e2866001 	add	r6, r6, #1
+  3267a4:	bafffff7 	blt	326788 <drawGameLoop>
+  3267a8:	e1a06004 	mov	r6, r4
+  3267ac:	e3a05000 	mov	r5, #0
+  3267b0:	e15b000a 	cmp	fp, sl
+  3267b4:	e2877001 	add	r7, r7, #1
+  3267b8:	e28bb001 	add	fp, fp, #1
+  3267bc:	bafffff1 	blt	326788 <drawGameLoop>
+  3267c0:	e8bd4ff8 	pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  3267c4:	e12fff1e 	bx	lr
+
+003267c8 <drawCell>:
+  3267c8:	e92d4ff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  3267cc:	e1a04006 	mov	r4, r6
+  3267d0:	e3a05000 	mov	r5, #0
+  3267d4:	e3a0b000 	mov	fp, #0
+
+003267d8 <drawCellLoop>:
+  3267d8:	e0d820b2 	ldrh	r2, [r8], #2
+  3267dc:	e1a00006 	mov	r0, r6
+  3267e0:	e1a01007 	mov	r1, r7
+  3267e4:	ebffff13 	bl	326438 <DrawPixel>
+  3267e8:	e355001f 	cmp	r5, #31
+  3267ec:	e2855001 	add	r5, r5, #1
+  3267f0:	e2866001 	add	r6, r6, #1
+  3267f4:	bafffff7 	blt	3267d8 <drawCellLoop>
+  3267f8:	e1a06004 	mov	r6, r4
+  3267fc:	e3a05000 	mov	r5, #0
+  326800:	e35b001f 	cmp	fp, #31
+  326804:	e2877001 	add	r7, r7, #1
+  326808:	e28bb001 	add	fp, fp, #1
+  32680c:	bafffff1 	blt	3267d8 <drawCellLoop>
+  326810:	e8bd4ff8 	pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  326814:	e12fff1e 	bx	lr
+
+00326818 <arrowInit>:
+  326818:	03a05000 	moveq	r5, #0
+
+0032681c <arrowControl>:
+  32681c:	e3a00000 	mov	r0, #0
+  326820:	eb000081 	bl	326a2c <Read_SNES>
+  326824:	e1a04000 	mov	r4, r0
+
+00326828 <arrowControlLoop>:
+  326828:	e3540005 	cmp	r4, #5
+  32682c:	059f60dc 	ldreq	r6, [pc, #220]	; 326910 <clearScreenLoop+0x40>
+  326830:	03a07f9a 	moveq	r7, #616	; 0x268
+  326834:	03a05001 	moveq	r5, #1
+  326838:	0a000007 	beq	32685c <draw>
+  32683c:	e3540006 	cmp	r4, #6
+  326840:	059f60c8 	ldreq	r6, [pc, #200]	; 326910 <clearScreenLoop+0x40>
+  326844:	059f70c8 	ldreq	r7, [pc, #200]	; 326914 <clearScreenLoop+0x44>
+  326848:	03a05002 	moveq	r5, #2
+  32684c:	0a000002 	beq	32685c <draw>
+  326850:	e3540009 	cmp	r4, #9
+  326854:	0a000012 	beq	3268a4 <aPressed>
+  326858:	eaffffef 	b	32681c <arrowControl>
+
+0032685c <draw>:
+  32685c:	e3a0901f 	mov	r9, #31
+  326860:	e3a0a01f 	mov	sl, #31
+  326864:	e59f80a0 	ldr	r8, [pc, #160]	; 32690c <clearScreenLoop+0x3c>
+  326868:	ebffffc2 	bl	326778 <drawGame>
+
+0032686c <replace>:
+  32686c:	e3550001 	cmp	r5, #1
+  326870:	059f6098 	ldreq	r6, [pc, #152]	; 326910 <clearScreenLoop+0x40>
+  326874:	059f7098 	ldreq	r7, [pc, #152]	; 326914 <clearScreenLoop+0x44>
+  326878:	e3550002 	cmp	r5, #2
+  32687c:	059f608c 	ldreq	r6, [pc, #140]	; 326910 <clearScreenLoop+0x40>
+  326880:	03a07f9a 	moveq	r7, #616	; 0x268
+  326884:	e3550000 	cmp	r5, #0
+  326888:	0affffe3 	beq	32681c <arrowControl>
+  32688c:	e3a0901f 	mov	r9, #31
+  326890:	e3a0a01f 	mov	sl, #31
+  326894:	e59f807c 	ldr	r8, [pc, #124]	; 326918 <clearScreenLoop+0x48>
+  326898:	ebffffb6 	bl	326778 <drawGame>
+  32689c:	eaffffde 	b	32681c <arrowControl>
+  3268a0:	e1a0b005 	mov	fp, r5
+
+003268a4 <aPressed>:
+  3268a4:	e3550000 	cmp	r5, #0
+  3268a8:	0afffbf0 	beq	325870 <backGround>
+  3268ac:	e3550001 	cmp	r5, #1
+  3268b0:	0afffbee 	beq	325870 <backGround>
+  3268b4:	e3550002 	cmp	r5, #2
+  3268b8:	0affffff 	beq	3268bc <clearScreen>
+
+003268bc <clearScreen>:
+  3268bc:	e59f8054 	ldr	r8, [pc, #84]	; 326918 <clearScreenLoop+0x48>
+  3268c0:	e3a06000 	mov	r6, #0
+  3268c4:	e3a07000 	mov	r7, #0
+  3268c8:	e59f9034 	ldr	r9, [pc, #52]	; 326904 <clearScreenLoop+0x34>
+  3268cc:	e59fa034 	ldr	sl, [pc, #52]	; 326908 <clearScreenLoop+0x38>
+
+003268d0 <clearScreenLoop>:
+  3268d0:	ebffffbc 	bl	3267c8 <drawCell>
+  3268d4:	e286601f 	add	r6, r6, #31
+  3268d8:	e1560009 	cmp	r6, r9
+  3268dc:	bafffffb 	blt	3268d0 <clearScreenLoop>
+  3268e0:	e3a06000 	mov	r6, #0
+  3268e4:	e157000a 	cmp	r7, sl
+  3268e8:	e287701f 	add	r7, r7, #31
+  3268ec:	bafffff7 	blt	3268d0 <clearScreenLoop>
+  3268f0:	eaffff9f 	b	326774 <haltLoop$>
+  3268f4:	003262f4 	.word	0x003262f4
+  3268f8:	003262d4 	.word	0x003262d4
+  3268fc:	003262e0 	.word	0x003262e0
+  326900:	0019d860 	.word	0x0019d860
+  326904:	000003ff 	.word	0x000003ff
+  326908:	000002ff 	.word	0x000002ff
+  32690c:	00322060 	.word	0x00322060
+  326910:	000001ae 	.word	0x000001ae
+  326914:	00000295 	.word	0x00000295
+  326918:	0031d860 	.word	0x0031d860
+
+0032691c <main>:
+  32691c:	e3a0d902 	mov	sp, #32768	; 0x8000
+  326920:	ebfffe8f 	bl	326364 <EnableJTAG>
+  326924:	eb00007a 	bl	326b14 <InitUART>
+
+00326928 <Init_GPIO>:
+  326928:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  32692c:	eb000003 	bl	326940 <dataInit>
+  326930:	eb000008 	bl	326958 <latchInit>
+  326934:	eb000011 	bl	326980 <clockInit>
+  326938:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  32693c:	e12fff1e 	bx	lr
+
+00326940 <dataInit>:
+  326940:	e59f01bc 	ldr	r0, [pc, #444]	; 326b04 <haltLoop$+0x4>
+  326944:	e5902000 	ldr	r2, [r0]
+  326948:	e3a03007 	mov	r3, #7
+  32694c:	e1c22003 	bic	r2, r2, r3
+  326950:	e5802000 	str	r2, [r0]
+  326954:	e12fff1e 	bx	lr
+
+00326958 <latchInit>:
+  326958:	e59f01a8 	ldr	r0, [pc, #424]	; 326b08 <haltLoop$+0x8>
+  32695c:	e5902000 	ldr	r2, [r0]
+  326960:	e3a03007 	mov	r3, #7
+  326964:	e1a03d83 	lsl	r3, r3, #27
+  326968:	e1c22003 	bic	r2, r2, r3
+  32696c:	e3a04001 	mov	r4, #1
+  326970:	e1a04d84 	lsl	r4, r4, #27
+  326974:	e1822004 	orr	r2, r2, r4
+  326978:	e5802000 	str	r2, [r0]
+  32697c:	e12fff1e 	bx	lr
+
+00326980 <clockInit>:
+  326980:	e59f017c 	ldr	r0, [pc, #380]	; 326b04 <haltLoop$+0x4>
+  326984:	e5902000 	ldr	r2, [r0]
+  326988:	e3a03007 	mov	r3, #7
+  32698c:	e1a03183 	lsl	r3, r3, #3
+  326990:	e1c22003 	bic	r2, r2, r3
+  326994:	e3a04001 	mov	r4, #1
+  326998:	e1a04184 	lsl	r4, r4, #3
+  32699c:	e1822004 	orr	r2, r2, r4
+  3269a0:	e5802000 	str	r2, [r0]
+  3269a4:	e12fff1e 	bx	lr
+
+003269a8 <Write_Clock>:
+  3269a8:	e3a0000b 	mov	r0, #11
+  3269ac:	e59f2154 	ldr	r2, [pc, #340]	; 326b08 <haltLoop$+0x8>
+  3269b0:	e3a03001 	mov	r3, #1
+  3269b4:	e1a03013 	lsl	r3, r3, r0
+  3269b8:	e3310000 	teq	r1, #0
+  3269bc:	05823028 	streq	r3, [r2, #40]	; 0x28
+  3269c0:	1582301c 	strne	r3, [r2, #28]
+  3269c4:	e12fff1e 	bx	lr
+
+003269c8 <Write_Latch>:
+  3269c8:	e3a00009 	mov	r0, #9
+  3269cc:	e59f2134 	ldr	r2, [pc, #308]	; 326b08 <haltLoop$+0x8>
+  3269d0:	e3a03001 	mov	r3, #1
+  3269d4:	e1a03013 	lsl	r3, r3, r0
+  3269d8:	e3310000 	teq	r1, #0
+  3269dc:	05823028 	streq	r3, [r2, #40]	; 0x28
+  3269e0:	1582301c 	strne	r3, [r2, #28]
+  3269e4:	e12fff1e 	bx	lr
+
+003269e8 <Read_Data>:
+  3269e8:	e3a0000a 	mov	r0, #10
+  3269ec:	e59f2114 	ldr	r2, [pc, #276]	; 326b08 <haltLoop$+0x8>
+  3269f0:	e5921034 	ldr	r1, [r2, #52]	; 0x34
+  3269f4:	e3a03001 	mov	r3, #1
+  3269f8:	e1a03013 	lsl	r3, r3, r0
+  3269fc:	e0011003 	and	r1, r1, r3
+  326a00:	e3310000 	teq	r1, #0
+  326a04:	03a00000 	moveq	r0, #0
+  326a08:	13a00001 	movne	r0, #1
+  326a0c:	e12fff1e 	bx	lr
+
+00326a10 <wait>:
+  326a10:	e59f00f4 	ldr	r0, [pc, #244]	; 326b0c <haltLoop$+0xc>
+  326a14:	e5901000 	ldr	r1, [r0]
+  326a18:	e0811003 	add	r1, r1, r3
+
+00326a1c <waitLoop>:
+  326a1c:	e5902000 	ldr	r2, [r0]
+  326a20:	e1510002 	cmp	r1, r2
+  326a24:	8afffffc 	bhi	326a1c <waitLoop>
+  326a28:	e12fff1e 	bx	lr
+
+00326a2c <Read_SNES>:
+  326a2c:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  326a30:	e59f50d8 	ldr	r5, [pc, #216]	; 326b10 <haltLoop$+0x10>
+  326a34:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a38:	e3a01001 	mov	r1, #1
+  326a3c:	ebffffd9 	bl	3269a8 <Write_Clock>
+  326a40:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326a44:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a48:	e3a01001 	mov	r1, #1
+  326a4c:	ebffffdd 	bl	3269c8 <Write_Latch>
+  326a50:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326a54:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a58:	e3a0300c 	mov	r3, #12
+  326a5c:	ebffffeb 	bl	326a10 <wait>
+  326a60:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326a64:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a68:	e3a01000 	mov	r1, #0
+  326a6c:	ebffffd5 	bl	3269c8 <Write_Latch>
+  326a70:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326a74:	e3a04000 	mov	r4, #0
+
+00326a78 <pulseLoop>:
+  326a78:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a7c:	e3a03006 	mov	r3, #6
+  326a80:	ebffffe2 	bl	326a10 <wait>
+  326a84:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326a88:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a8c:	e3a01000 	mov	r1, #0
+  326a90:	ebffffc4 	bl	3269a8 <Write_Clock>
+  326a94:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326a98:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326a9c:	e3a03006 	mov	r3, #6
+  326aa0:	ebffffda 	bl	326a10 <wait>
+  326aa4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326aa8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326aac:	ebffffcd 	bl	3269e8 <Read_Data>
+  326ab0:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326ab4:	e4c50001 	strb	r0, [r5], #1
+  326ab8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326abc:	e3a01001 	mov	r1, #1
+  326ac0:	ebffffb8 	bl	3269a8 <Write_Clock>
+  326ac4:	e49de004 	pop	{lr}		; (ldr lr, [sp], #4)
+  326ac8:	e2844001 	add	r4, r4, #1
+  326acc:	e3540010 	cmp	r4, #16
+  326ad0:	baffffe8 	blt	326a78 <pulseLoop>
+  326ad4:	e59f5034 	ldr	r5, [pc, #52]	; 326b10 <haltLoop$+0x10>
+  326ad8:	e3a01000 	mov	r1, #0
+  326adc:	e3a00001 	mov	r0, #1
+
+00326ae0 <check>:
+  326ae0:	e4d51001 	ldrb	r1, [r5], #1
+  326ae4:	e3510000 	cmp	r1, #0
+  326ae8:	0a000002 	beq	326af8 <returnButton>
+  326aec:	e2800001 	add	r0, r0, #1
+  326af0:	e3500010 	cmp	r0, #16
+  326af4:	1afffff9 	bne	326ae0 <check>
+
+00326af8 <returnButton>:
+  326af8:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  326afc:	e12fff1e 	bx	lr
+
+00326b00 <haltLoop$>:
+  326b00:	eafffffe 	b	326b00 <haltLoop$>
+  326b04:	20200004 	.word	0x20200004
+  326b08:	20200000 	.word	0x20200000
+  326b0c:	20003004 	.word	0x20003004
+  326b10:	00323060 	.word	0x00323060
+
+00326b14 <InitUART>:
+  326b14:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326b18:	e59f0178 	ldr	r0, [pc, #376]	; 326c98 <WaitForCycles+0x10>
+  326b1c:	e3a01001 	mov	r1, #1
+  326b20:	e5801000 	str	r1, [r0]
+  326b24:	e59f0170 	ldr	r0, [pc, #368]	; 326c9c <WaitForCycles+0x14>
+  326b28:	e0211001 	eor	r1, r1, r1
+  326b2c:	e5801000 	str	r1, [r0]
+  326b30:	e59f0168 	ldr	r0, [pc, #360]	; 326ca0 <WaitForCycles+0x18>
+  326b34:	e0211001 	eor	r1, r1, r1
+  326b38:	e5801000 	str	r1, [r0]
+  326b3c:	e59f0160 	ldr	r0, [pc, #352]	; 326ca4 <WaitForCycles+0x1c>
+  326b40:	e3a01003 	mov	r1, #3
+  326b44:	e5801000 	str	r1, [r0]
+  326b48:	e59f0158 	ldr	r0, [pc, #344]	; 326ca8 <WaitForCycles+0x20>
+  326b4c:	e0211001 	eor	r1, r1, r1
+  326b50:	e5801000 	str	r1, [r0]
+  326b54:	e59f0140 	ldr	r0, [pc, #320]	; 326c9c <WaitForCycles+0x14>
+  326b58:	e0211001 	eor	r1, r1, r1
+  326b5c:	e5801000 	str	r1, [r0]
+  326b60:	e59f0144 	ldr	r0, [pc, #324]	; 326cac <WaitForCycles+0x24>
+  326b64:	e3a010c6 	mov	r1, #198	; 0xc6
+  326b68:	e5801000 	str	r1, [r0]
+  326b6c:	e59f013c 	ldr	r0, [pc, #316]	; 326cb0 <WaitForCycles+0x28>
+  326b70:	e59f113c 	ldr	r1, [pc, #316]	; 326cb4 <WaitForCycles+0x2c>
+  326b74:	e5801000 	str	r1, [r0]
+  326b78:	e3a0000e 	mov	r0, #14
+  326b7c:	e3a01002 	mov	r1, #2
+  326b80:	eb000052 	bl	326cd0 <SetGpioFunction>
+  326b84:	e3a0000f 	mov	r0, #15
+  326b88:	e3a01002 	mov	r1, #2
+  326b8c:	eb00004f 	bl	326cd0 <SetGpioFunction>
+  326b90:	e59f0120 	ldr	r0, [pc, #288]	; 326cb8 <WaitForCycles+0x30>
+  326b94:	e0211001 	eor	r1, r1, r1
+  326b98:	e5801000 	str	r1, [r0]
+  326b9c:	e3a00096 	mov	r0, #150	; 0x96
+  326ba0:	eb000038 	bl	326c88 <WaitForCycles>
+  326ba4:	e59f0110 	ldr	r0, [pc, #272]	; 326cbc <WaitForCycles+0x34>
+  326ba8:	e3a01903 	mov	r1, #49152	; 0xc000
+  326bac:	e5801000 	str	r1, [r0]
+  326bb0:	e3a00096 	mov	r0, #150	; 0x96
+  326bb4:	eb000033 	bl	326c88 <WaitForCycles>
+  326bb8:	e59f00fc 	ldr	r0, [pc, #252]	; 326cbc <WaitForCycles+0x34>
+  326bbc:	e0211001 	eor	r1, r1, r1
+  326bc0:	e5801000 	str	r1, [r0]
+  326bc4:	e59f00d4 	ldr	r0, [pc, #212]	; 326ca0 <WaitForCycles+0x18>
+  326bc8:	e3a01003 	mov	r1, #3
+  326bcc:	e5801000 	str	r1, [r0]
+  326bd0:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+00326bd4 <PutCharUART>:
+  326bd4:	e59f20e4 	ldr	r2, [pc, #228]	; 326cc0 <WaitForCycles+0x38>
+
+00326bd8 <putWaitLoop$>:
+  326bd8:	e5921000 	ldr	r1, [r2]
+  326bdc:	e3110020 	tst	r1, #32
+  326be0:	0afffffc 	beq	326bd8 <putWaitLoop$>
+  326be4:	e59f20d8 	ldr	r2, [pc, #216]	; 326cc4 <WaitForCycles+0x3c>
+  326be8:	e5820000 	str	r0, [r2]
+  326bec:	e1a0f00e 	mov	pc, lr
+
+00326bf0 <GetCharUART>:
+  326bf0:	e59f20c8 	ldr	r2, [pc, #200]	; 326cc0 <WaitForCycles+0x38>
+
+00326bf4 <getWaitLoop$>:
+  326bf4:	e5921000 	ldr	r1, [r2]
+  326bf8:	e3110001 	tst	r1, #1
+  326bfc:	0afffffc 	beq	326bf4 <getWaitLoop$>
+  326c00:	e59f20bc 	ldr	r2, [pc, #188]	; 326cc4 <WaitForCycles+0x3c>
+  326c04:	e5920000 	ldr	r0, [r2]
+  326c08:	e1a0f00e 	mov	pc, lr
+
+00326c0c <WriteStringUART>:
+  326c0c:	e92d4030 	push	{r4, r5, lr}
+  326c10:	e1a04000 	mov	r4, r0
+  326c14:	e1a05001 	mov	r5, r1
+
+00326c18 <writeLoop$>:
+  326c18:	e3550000 	cmp	r5, #0
+  326c1c:	da000004 	ble	326c34 <writeLoopEnd$>
+  326c20:	e5940000 	ldr	r0, [r4]
+  326c24:	ebffffea 	bl	326bd4 <PutCharUART>
+  326c28:	e2844001 	add	r4, r4, #1
+  326c2c:	e2455001 	sub	r5, r5, #1
+  326c30:	eafffff8 	b	326c18 <writeLoop$>
+
+00326c34 <writeLoopEnd$>:
+  326c34:	e8bd8030 	pop	{r4, r5, pc}
+
+00326c38 <ReadLineUART>:
+  326c38:	e92d4070 	push	{r4, r5, r6, lr}
+  326c3c:	e1a04000 	mov	r4, r0
+  326c40:	e1a05001 	mov	r5, r1
+  326c44:	e3a06000 	mov	r6, #0
+
+00326c48 <readLoop$>:
+  326c48:	e1360005 	teq	r6, r5
+  326c4c:	0a00000b 	beq	326c80 <readLoopEnd$>
+  326c50:	ebffffe6 	bl	326bf0 <GetCharUART>
+  326c54:	ebffffde 	bl	326bd4 <PutCharUART>
+  326c58:	e5c40000 	strb	r0, [r4]
+  326c5c:	e2866001 	add	r6, r6, #1
+  326c60:	e2844001 	add	r4, r4, #1
+  326c64:	e330000d 	teq	r0, #13
+  326c68:	1afffff6 	bne	326c48 <readLoop$>
+  326c6c:	e3a0000a 	mov	r0, #10
+  326c70:	ebffffd7 	bl	326bd4 <PutCharUART>
+  326c74:	e2444001 	sub	r4, r4, #1
+  326c78:	e3a00000 	mov	r0, #0
+  326c7c:	e5c40000 	strb	r0, [r4]
+
+00326c80 <readLoopEnd$>:
+  326c80:	e2460001 	sub	r0, r6, #1
+  326c84:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+00326c88 <WaitForCycles>:
+  326c88:	e2400001 	sub	r0, r0, #1
+  326c8c:	e3500000 	cmp	r0, #0
+  326c90:	aafffffc 	bge	326c88 <WaitForCycles>
+  326c94:	e1a0f00e 	mov	pc, lr
+  326c98:	20215004 	.word	0x20215004
+  326c9c:	20215044 	.word	0x20215044
+  326ca0:	20215060 	.word	0x20215060
+  326ca4:	2021504c 	.word	0x2021504c
+  326ca8:	20215050 	.word	0x20215050
+  326cac:	20215048 	.word	0x20215048
+  326cb0:	20215068 	.word	0x20215068
+  326cb4:	0000010e 	.word	0x0000010e
+  326cb8:	20200094 	.word	0x20200094
+  326cbc:	20200098 	.word	0x20200098
+  326cc0:	20215054 	.word	0x20215054
+  326cc4:	20215040 	.word	0x20215040
+
+00326cc8 <GetGpioAddress>:
+  326cc8:	e59f00cc 	ldr	r0, [pc, #204]	; 326d9c <GetGpio+0x44>
+  326ccc:	e1a0f00e 	mov	pc, lr
+
+00326cd0 <SetGpioFunction>:
+  326cd0:	e3500035 	cmp	r0, #53	; 0x35
+  326cd4:	93510007 	cmpls	r1, #7
+  326cd8:	81a0f00e 	movhi	pc, lr
+  326cdc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326ce0:	e1a02000 	mov	r2, r0
+  326ce4:	ebfffff7 	bl	326cc8 <GetGpioAddress>
+
+00326ce8 <functionLoop$>:
+  326ce8:	e3520009 	cmp	r2, #9
+  326cec:	8242200a 	subhi	r2, r2, #10
+  326cf0:	82800004 	addhi	r0, r0, #4
+  326cf4:	8afffffb 	bhi	326ce8 <functionLoop$>
+  326cf8:	e0822082 	add	r2, r2, r2, lsl #1
+  326cfc:	e1a01211 	lsl	r1, r1, r2
+  326d00:	e3a03007 	mov	r3, #7
+  326d04:	e1a03213 	lsl	r3, r3, r2
+  326d08:	e5902000 	ldr	r2, [r0]
+  326d0c:	e1c22003 	bic	r2, r2, r3
+  326d10:	e1811002 	orr	r1, r1, r2
+  326d14:	e5801000 	str	r1, [r0]
+  326d18:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+00326d1c <SetGpio>:
+  326d1c:	e3500035 	cmp	r0, #53	; 0x35
+  326d20:	81a0f00e 	movhi	pc, lr
+  326d24:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  326d28:	e1a02000 	mov	r2, r0
+  326d2c:	ebffffe5 	bl	326cc8 <GetGpioAddress>
+  326d30:	e1a032a2 	lsr	r3, r2, #5
+  326d34:	e1a03103 	lsl	r3, r3, #2
+  326d38:	e0800003 	add	r0, r0, r3
+  326d3c:	e202201f 	and	r2, r2, #31
+  326d40:	e3a03001 	mov	r3, #1
+  326d44:	e1a03213 	lsl	r3, r3, r2
+  326d48:	e3310000 	teq	r1, #0
+  326d4c:	05803028 	streq	r3, [r0, #40]	; 0x28
+  326d50:	1580301c 	strne	r3, [r0, #28]
+  326d54:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+00326d58 <GetGpio>:
+  326d58:	e3500035 	cmp	r0, #53	; 0x35
+  326d5c:	81a0f00e 	movhi	pc, lr
+  326d60:	e92d4010 	push	{r4, lr}
+  326d64:	e1a04000 	mov	r4, r0
+  326d68:	ebffffd6 	bl	326cc8 <GetGpioAddress>
+  326d6c:	e1a032a4 	lsr	r3, r4, #5
+  326d70:	e1a03103 	lsl	r3, r3, #2
+  326d74:	e0800003 	add	r0, r0, r3
+  326d78:	e204401f 	and	r4, r4, #31
+  326d7c:	e3a03001 	mov	r3, #1
+  326d80:	e1a03413 	lsl	r3, r3, r4
+  326d84:	e5904034 	ldr	r4, [r0, #52]	; 0x34
+  326d88:	e0044003 	and	r4, r4, r3
+  326d8c:	e3340000 	teq	r4, #0
+  326d90:	03a00000 	moveq	r0, #0
+  326d94:	13a00001 	movne	r0, #1
+  326d98:	e8bd8010 	pop	{r4, pc}
+  326d9c:	20200000 	.word	0x20200000
